@@ -1,26 +1,32 @@
 #!/bin/bash
-## Program: gitConfig.sh
+## Program: git-config.sh
 ## Author: Chris Pavlovich
 ## Edited: Feb 9, 2019
 
-# windows git bash will respond to ~ by def w/ /c/users/username
-# linux terminal will respond to ~ by def w/ /home/username
+# tested in linux and windows (git bash)
 
-gen=0; userName="$(whoami)"; gitName=""; email=""; _status_=0
+# variable declarations
+gen=0; gitName=""; email=""; _status_=0
 rsaPath="~/.ssh"; startDir="$(pwd)"; preKey=1
 
-if [[ -s "$rsaPath/id_rsa" ]] && [[ -s "$rsaPath/id_rsa.pub" ]]; then
-    echo "Key pair located."; preKey=0
-elif [[ -s "/home/$userName/.ssh/id_rsa" ]] && [[ -s "/home/$userName/.ssh/id_rsa.pub" ]]; then
-    echo "Key pair located."; preKey=0
-fi
+function main() {
+    read -p "Would you like to use an RSA key pair for authentication? [y/N]: " -r
+    if [[ "$REPLY" =~ ^[nN] ]]; then
+        
+}
+
+function checkForKey() {
+    if [[ -s "$rsaPath/id_rsa" ]] && [[ -s "$rsaPath/id_rsa.pub" ]]; then
+        echo "Key pair located."; preKey=0
+    elif [[ -s "/home/$USER/.ssh/id_rsa" ]] && [[ -s "/home/$USER/.ssh/id_rsa.pub" ]]; then
+        echo "Key pair located."; preKey=0
+    fi
 
 echo "No ssh key detected."
 read -p "Generate new ssh key now? [Y/n]: " -r
 if [[ "$REPLY" =~ ^[nN] ]]; then
     gen=1
-    echo "ERROR: no key pair and user denied generation." >&2
-    _status_=1
+    echo "WARN: no key pair in default location and user denied generation." >&2
 else # generate ssh key
     gen=0
 fi
@@ -36,6 +42,11 @@ if [ $_status_ -eq 0 ]; then
         # grab gitName if not already done
         while [[ -z "$gitName" ]]; do
             read -p "Enter a git username: " gitName
+
+            # must not be empty
+            if [[ -z "$gitName" ]]; then
+                echo "This field is required."
+            fi
         done
 
         # configure git interface

@@ -13,12 +13,9 @@ wrkPath=$(pwd)
 
 # exit if root
 if [[ "$(echo $UID)" == "0" ]] || [[ "$(whoami)" == "root" ]]; then
-    echo "Warning: this does not need elevated permissions."
-    read -p "Continue? [Y/n]: " -n 1 -r
-    if [[ $REPLY =~ ^[Nn] ]]; then
-        echo "Exiting script"
-        exit 1
-    fi
+    echo "This script does not need elevated permissions."
+    echo "Exiting script"
+    exit 1
 fi
 
 # add & commit current changes
