@@ -32,4 +32,4 @@ git commit -m "Merge - CJ-Pav"
 git push
 git status
 
-return 0 || exit 0
+exit 0 || return 0
