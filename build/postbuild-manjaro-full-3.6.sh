@@ -9,17 +9,18 @@
 # prompt and start build script
 echo
 read -p "Running manjaro-postbuild-full-install-1.sh (any key to continue)" -n 1 -r
-if [[ ! $REPLY =~ ^{Yy]$ ]]
+if [[ ! -e "$REPLY" ]]
 then
-	# run updates
 	echo
-	echo "Mirrors and updates..."
+	
+	# grab fastest mirrors
 	sudo pacman-mirrors --fasttrack
+	
+	# run updates
 	sudo pacman -Syu
 
 	# install my personal favorites
-	echo
-	echo "Building system..."
+	echo; echo "Software installs..."
 	sudo pacman -S yaourt
 	sudo pacman -S vim
 	sudo pacman -S gcc
@@ -35,8 +36,7 @@ then
 
 
 	# remove unnessary software
-	echo
-	echo "Trimming the fat..."
+	echo; echo "Remove bloatware..."
 	sudo pacman -Rs hexchat
 	sudo pacman -Rs pamac
 	sudo pacman -Rs audacious
@@ -46,22 +46,19 @@ then
 	sudo pacman -Rs manjaro-hello
 
 	# enable essentials
-	echo
-	echo "Enabling services..."
+	echo; echo "Enabling services..."
 	sudo systemctl enable tlp
 	sudo systemctl enable firewalld
 	sudo systemctl enable sshd
 
 	# confirm updates with yaourt
-	echo
-	echo "One more sweep..."
+	echo; echo "One more sweep..."
 	yaourt -Syua
 
 	# prompt and reboot to apply changes
 	echo
-	read -p "Restart to apply updates? [Y/n]" -r
-	if [[ $REPLY =~ ^[Yy] ]]
-	then
+	read -p "Restart to apply changes? [Y/n]" -r
+	if [[ $REPLY =~ ^[Yy] ]]; then
 		sudo reboot
 	fi
 fi
