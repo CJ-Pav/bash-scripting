@@ -18,6 +18,6 @@ sudo apt-get update
 sudo apt-get install spotify-client
 
 echo
-echo complete
+echo "Complete."
 echo
 

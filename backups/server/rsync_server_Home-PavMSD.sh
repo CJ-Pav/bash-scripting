@@ -35,7 +35,7 @@ else
 
 			contents="$(ls /home/$username)"
 
-			for dir in contents; do
+			for dir in $contents; do
 				# back up each home directory sub-directory into backup home directories
 				sudo rsync -avh /home/$username/$dir /home/drives/pav-msd/backups/users/$username/
 
