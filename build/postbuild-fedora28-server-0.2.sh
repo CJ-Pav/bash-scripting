@@ -3,6 +3,9 @@
 
 echo
 
+sudo dnf -y update
+sudo dnf -y upgrade
+
 sudo dnf -y install vim
 sudo dnf -y install htop
 sudo dnf -y install gcc
