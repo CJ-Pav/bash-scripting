@@ -7,9 +7,11 @@
 # Description: Back up home directories to pav-msd
 ###
 
+# *** DEPRECIATED ***
+# use 'backup-user-profiles.sh'
+
 # check if run as root
 if [ $UID -ne 0 ]; then
-	echo "Warning: elevated permissions will be required."
 	echo "Warning: elevated permissions will be required." >&2
 fi
 
