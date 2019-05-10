@@ -73,8 +73,8 @@ function validate() {
     return 0
 }
 
-# backup specified user
-function backup() {
+# backup specified user(s)
+function backupUserProfiles() {
     # verify user profile exists
     validate
 
