@@ -10,6 +10,8 @@ ___status___=0
 function updates() {
     sudo dnf -y update
     sudo dnf -y upgrade
+    
+    cleanUp
 
     return 0
 }
@@ -27,6 +29,8 @@ function softwareInstalls() {
     sudo dnf -y install nodejs
     sudo dnf -y install npm
 
+    cleanUp
+
     return 0
 }
 
@@ -35,22 +39,28 @@ function softwareEnabling() {
     sudo systemctl enable tlp
     sudo systemctl enable firewalld
     
+    cleanUp
+    
     return 0
 }
 
 function cleanUp() {
-    sudo dnf -y autoremove
+    # apply common fixes if error detected
+    if [ $___status___ -ne 0 ]; then
+        sudo dnf -y autoremove
+
+        ___status___=0
+    fi
 
     return 0
 }
 
 # script driver
 function main() {
-    hostname
-    updates
-    softwareInstalls
-    softwareEnabling
-    cleanUp
+    hostname; ___status___=$?
+    updates; ___status___=$?
+    softwareInstalls; ___status___=$?
+    softwareEnabling; ___status___=$?
     
     return $___status___
 }
