@@ -1,12 +1,10 @@
 #!/bin/bash
-# Program Filename: install-virtualbox.sh
+# Program Filename: install-virtualbox-fedora.sh
 # Author: Chris Pavlovich
 # Date: Nov 23, 2018
-# Description: read the Filename
 
 dnf -y update
 dnf -y upgrade
-dnf autoremove
 
 dnf install gcc-c++ libcap-devel libcurl-devel libIDL-devel libstdc++-static \
   libxslt-devel libXmu-devel openssl-devel pam-devel pulseaudio-libs-devel \

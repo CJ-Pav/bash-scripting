@@ -5,7 +5,7 @@
  # Description: remove bloatware from manjaro basic installation, add my own
 
 # not for distribution
-___wrkPath___="./.postBuild/Manjaro/Server/.tmp"
+___wrkPath___="./.manjaro-build-log"
 # [[ -d $___wrkPath___ ]] || mkdir -p $___wrkPath___
 mkdir -p $___wrkPath___
 ___runDefaults___=1

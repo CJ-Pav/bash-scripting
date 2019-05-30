@@ -17,6 +17,7 @@ else	# prep user list (space delimited)
 		echo "Error: back up drive not mounted" >&2
 		exit 1
 	else 	# back up data from pav-x to pav-msd
+		# use cp if rsync returns non-zero status
 		rsync -avh /home/drives/pav-x/backups /home/drives/pav-msd/
 		[ $? ] || cp -rvu /home/drives/pav-x/backups /home/drives/pav-msd/
 		rsync -avh /home/drives/pav-x/master /home/drives/pav-msd/storage/
@@ -26,4 +27,5 @@ else	# prep user list (space delimited)
 fi
 
 echo "Complete. Errors (if any) will be listed above."
-exit 0
+
+exit 0 || return 0
