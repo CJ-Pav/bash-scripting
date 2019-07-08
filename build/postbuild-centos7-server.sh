@@ -7,13 +7,10 @@ sudo yum -y autoremove
 sudo yum -y update
 sudo yum -y upgrade
 
-sudo yum -y install vim
-sudo yum -y install htop
-sudo yum -y install gcc
-sudo yum -y install g++
-sudo yum -y install clang
-sudo yum -y install tlp
-sudo yum -y install 
+software="vim htop gcc g++ clang tlp"
+
+for item in ${software}; do
+    sudo yum -y install ${item}
 
 sudo yum -y autoremove
 
