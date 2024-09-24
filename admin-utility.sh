@@ -184,7 +184,7 @@ function ptech_configuration() {
         echo "Configuration file found."
 
         # check for actual script files
-        ls /home/ptech/ | grep -i "scripts"; ___status___=$?
+        ls ptech/ | grep -i "scripts"; ___status___=$?
         if [ $___status___ -ne 0 ]; then
             echo "Unable to locate install files."
             echo "Make sure to run this from the bash-scripting repository."
@@ -202,7 +202,7 @@ function ptech_configuration() {
     git pull; ___status___=$?
 
     # make scripts executable
-    chmod +x ./ptech/scripts/check_software.sh
+    chmod +x ptech/scripts/check_software.sh
 
     if [ $___status___ -ne 0 ]; then
         echo "Failed to auto update. Exiting."
@@ -212,7 +212,7 @@ function ptech_configuration() {
     fi
 
     # check mandatory software
-    ./ptech/check_software.sh; ___status___=$?
+    ptech/scripts/check_software.sh; ___status___=$?
 
     return $___status___
 }

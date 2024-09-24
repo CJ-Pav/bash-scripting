@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Filename: format.sh
 # Author: Chris Pavlovich
 # Edited: Apr 15, 2019
