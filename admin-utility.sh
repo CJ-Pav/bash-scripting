@@ -8,109 +8,8 @@
 
 # variable declarations (0 = true)
 ___status___=0
-__is_finished__=1
-__command__=""
 __username__=""
 ssh_email=""
-git_email=""
-git_username=""
-
-___input___=""
-
-# ensure root login
-function checkRoot() {
-    if [ $UID -ne 0 ]; then
-        echo; echo "Error: this script must be run as root."
-        exit 1
-    fi; echo
-    return 0
-}
-
-# create admins, groups, and add to/fro
-function createAdmins() {
-    if [[ ! -d "/home/cjpavlovich" ]]; then
-        useradd -m cjpavlovich; echo "N3Wh@v3n
-        N3Wh@v3n" | passwd cjpavlovich
-    fi
-    return 0
-}
-function createGroups() {
-    groupadd -v ptech
-    return 0
-}
-function addAdminsToGroups() {
-    useradd -aG cjpavlovich ptech
-    return 0
-}
-
-function sshConfiguration() {
-    # get user to config for
-    while [[ -z "$__username__" ]]; do
-        profiles="$(ls /home/)"
-        echo "The following user profiles were found:"; echo "$profiles"; echo
-        read -p "Which user profile is this key for? " __username__
-        echo "Suggested location for key: /home/$__username__/.ssh/$__username__\_rsa"
-    done
-    while [[ -z "$ssh_email" ]]; do
-        read -p "Enter an email address for key: " ssh_email
-    done
-    # gen key in profile for email address
-    ssh-keygen -t rsa -b 4096 -C "$ssh_email"
-    return 0
-}
-
-function config() {
-    echo "Configuration options..."
-    echo " user-config     -   create admin users"
-    echo " group-config    -   create admin groups"
-    echo " ssh-config      -   generate key pair and/or add to ssh-agent"
-    echo " git-config      -   configure git global settings"
-    echo " init-default    -   run all above commands"
-}
-
-# run command
-function execute() {
-    echo "Execute received: $1"
-    # if [ $# -gt 0 ]; then
-    #     if [[ "$1" == "exit" ]]; then
-    #         __is_finished__=0; echo "Exiting script..."
-    #     elif [[ "$1" == "config" ]]; then
-    #         createAdmins
-    #     elif [[ "$1" == "user-config" ]]; then
-    #         createAdmins
-    #     elif [[ "$1" == "group-config" ]]; then
-    #         createGroups; addAdminsToGroups
-    #     # elif [[ "$1" == "web-config" ]]; then
-    #     #     createGroups; addAdminsToGroups
-    #     elif [[ "$1" == "ssh-config" ]]; then
-    #         sshConfiguration
-    #     else
-    #         echo "Command not found"
-    #         return 1
-    #     fi
-    # fi
-    return 0
-}
-
-# do nothing
-function menu() {
-    while [ $__is_finished__ -ne 0 ]; do
-        echo " config    -   view configuration options"
-        echo " web       -   (broken) web services"
-        echo " vpn       -   (broken) start vpn connection"
-        echo " exit      -   return to shell"
-        # prompt user until valid input received
-        while [[ -z "$__command__" ]]; do
-            read -p "Enter a command: " $__command__
-            execute "$__command__"; ___status___=$?
-            # if returned non-zero, then bad input and make null
-            if [ $___status___ -ne 0 ]; then
-                __command__=""
-            fi
-        done
-    done
-    return 0
-}
 
 function ptech_AU_install() {
     sudo mkdir -p /home/ptech/.data/
@@ -166,6 +65,8 @@ function ptech_AU_install() {
 
     # clone AU repo
     git clone git@github.com:CJ-Pav/bash-scripting.git
+
+    chmod +x ./bash-scripting/admin-utility.sh
 
     echo "Exiting. Run admin-utility script in the new bash-scripting folder."
 
