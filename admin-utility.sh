@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Filename: admin-utility.sh
 # Author: Chris Pavlovich
 # Edited: Sep 24, 2024
@@ -113,34 +113,32 @@ function menu() {
 }
 
 function ptech_AU_install() {
-    mkdir -p /home/ptech/.data/
-    touch /home/ptech/.data/install.ptech
+    sudo mkdir -p /home/ptech/.data/
+    sudo touch /home/ptech/.data/install.ptech
 
     ### confirm username
     __username__=$USER
     escape=1
     while [[ $escape -ne 0 ]]; do
-        read -p "Is $__username__ your username? [y/N]: " -n 1 -r
-        echo
-        if [[ ! $REPLY =~ ^{Yy]$ ]]
-            read -p "Enter username: " $__username__
+        read -p "Is $__username__ your username? [y/N]: " -r
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            read -p "Enter username: " __username__
         else
             escape=0
         fi
     done;
     
     ### get user email
-    if [[ -z "$ssh_email" ]]; do
-        read -p "Enter your user email: " $ssh_email
-    done
+    if [[ -z "$ssh_email" ]]; then
+        read -p "Enter your user email: " ssh_email
+    fi
 
     ### confirm user email
     escape=1
     while [[ $escape -ne 0 ]]; do
-        read -p "Is $ssh_email correct? [y/N]: " -n 1 -r
-        echo
-        if [[ ! $REPLY =~ ^{Yy]$ ]]
-            read -p "Re-enter email: " $__username__
+        read -p "Is $ssh_email correct? [y/N]: " -r
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            read -p "Re-enter email: " __username__
         else
             escape=0
         fi
@@ -149,23 +147,27 @@ function ptech_AU_install() {
     ### check ssh keys
     # see if key exists, if not then create one
     ls /home/$__username__/.ssh/ | grep -i "id"; ___status___=$?
-    if [ ___status___ -ne 0 ]; then
+    if [ $___status___ -ne 0 ]; then
         ssh-keygen -t ed25519 -C "$ssh_email"
     fi
 
     echo "Copy this pub key to your github account."
     cat /home/$__username__/.ssh/id*.pub
 
-    read -p "Press any key when done..." -r -n 1
+    # store installer data in group folder
+    echo "username: $__username__" >> .tmp_dat.ptech
+    echo "email: $ssh_email" >> .tmp_dat.ptech
+    sudo su -c 'cat .tmp_dat.ptech > /home/ptech/.data/install.ptech'
+    rm .tmp_dat.ptech
+    # echo "username: $__username__" > /home/ptech/.data/install.ptech
+    # echo "email: $ssh_email" > /home/ptech/.data/install.ptech
+
+    read -p "Press enter/return when done..." -r
 
     # clone AU repo
     git clone git@github.com:CJ-Pav/bash-scripting.git
 
     echo "Exiting. Run admin-utility script in the new bash-scripting folder."
-
-    # store installer data in group folder
-    echo "username: $__username__" > /home/ptech/.data/install.ptech
-    echo "email: $ssh_email" /home/ptech/.data/install.ptech
 
     return 0
 }
@@ -173,20 +175,40 @@ function ptech_AU_install() {
 # ptech_configuration
 function ptech_configuration() {
     # check scripts
-    ls /etc/ | grep -i "ptech"; ___status___=$?
+    cat /home/ptech/.data/install.ptech | grep -i "username"; ___status___=$?
     if [ $___status___ -ne 0 ]; then
-        # config missing, run install
-        ptech_AU_install;
+        echo "Config missing, running install."
+        ptech_AU_install
         exit 0
     else
-        # self updater
-        git pull; ___status___=$?
+        echo "Configuration file found."
+
+        # check for actual script files
+        ls /home/ptech/ | grep -i "scripts"; ___status___=$?
         if [ $___status___ -ne 0 ]; then
-            echo "Failed to auto update. Exiting."
-            return 1
-        else
-            echo "Self update complete."
+            echo "Unable to locate install files."
+            echo "Make sure to run this from the bash-scripting repository."
+            read -p "Re run installer? [y/N]: " -r
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                echo "Running install."
+                ptech_AU_install
+                exit 0
+            fi
+            exit 1
         fi
+    fi
+
+    # self updater
+    git pull; ___status___=$?
+
+    # make scripts executable
+    chmod +x ./ptech/scripts/check_software.sh
+
+    if [ $___status___ -ne 0 ]; then
+        echo "Failed to auto update. Exiting."
+        return 1
+    else
+        echo "Self update complete."
     fi
 
     # check mandatory software
@@ -197,20 +219,22 @@ function ptech_configuration() {
 
 # script driver
 function main() {
-    echo; echo "*** Pavlovich Technologies Beta ***"; checkRoot
+    echo; echo "*** Pavlovich Technologies Beta ***"
     echo "Read the README.md file included before using this tool."
 
     # confirm with user
-    read -p "Add ptech configuration to this system? [y/N]: " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^{Yy]$ ]]
+    read -p "Add ptech configuration to this system? [y/N]: " -r
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
         ptech_configuration; ___status___=$?
+    else
+        ___status___=0
     fi
 
     if [ $___status___ -ne 0 ]; then
         echo "Warning: ptech_configuration exited with error status."
+    fi
 
-    echo "Complete."
+    return $___status___
 }
 
 main; ___status___=$?
