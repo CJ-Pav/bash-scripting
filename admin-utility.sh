@@ -11,6 +11,41 @@ ___status___=0
 __username__=""
 ssh_email=""
 
+# check ssh keys are installed, install, clone repo
+check_ssh_keys() {
+    # see if key exists, if not then create one
+    ls /home/$__username__/.ssh/ | grep -i "id"; ___status___=$?
+    if [ $___status___ -ne 0 ]; then
+        ssh-keygen -t ed25519 -C "$ssh_email"
+    fi
+
+    echo "Copy this pub key to your github account."
+    cat /home/$__username__/.ssh/id*.pub
+
+    # store installer data in group folder
+    echo "username: $__username__" >> .tmp_dat.ptech
+    echo "email: $ssh_email" >> .tmp_dat.ptech
+    sudo su -c 'cat .tmp_dat.ptech > /home/ptech/.data/install.ptech'
+    rm .tmp_dat.ptech
+    # echo "username: $__username__" > /home/ptech/.data/install.ptech
+    # echo "email: $ssh_email" > /home/ptech/.data/install.ptech
+
+    read -p "Press enter/return when done..." -r
+}
+
+# clone repo
+clone_repo() {
+    # make sure git installed
+    dpkg -s git; ___status___=$?
+    if [ $___status___ -ne 0 ]; then
+        sudo apt-get -y update
+        sudo apt-get -y install git
+    fi
+
+    # clone AU repo
+    git clone git@github.com:CJ-Pav/bash-scripting.git
+}
+
 function ptech_AU_install() {
     sudo mkdir -p /home/ptech/.data/
     sudo touch /home/ptech/.data/install.ptech
@@ -44,29 +79,9 @@ function ptech_AU_install() {
     done;
 
     ### check ssh keys
-    # see if key exists, if not then create one
-    ls /home/$__username__/.ssh/ | grep -i "id"; ___status___=$?
-    if [ $___status___ -ne 0 ]; then
-        ssh-keygen -t ed25519 -C "$ssh_email"
-    fi
+    check_ssh_keys
 
-    echo "Copy this pub key to your github account."
-    cat /home/$__username__/.ssh/id*.pub
-
-    # store installer data in group folder
-    echo "username: $__username__" >> .tmp_dat.ptech
-    echo "email: $ssh_email" >> .tmp_dat.ptech
-    sudo su -c 'cat .tmp_dat.ptech > /home/ptech/.data/install.ptech'
-    rm .tmp_dat.ptech
-    # echo "username: $__username__" > /home/ptech/.data/install.ptech
-    # echo "email: $ssh_email" > /home/ptech/.data/install.ptech
-
-    read -p "Press enter/return when done..." -r
-
-    # clone AU repo
-    git clone git@github.com:CJ-Pav/bash-scripting.git
-
-    chmod +x ./bash-scripting/admin-utility.sh
+    clone_repo
 
     echo "Exiting. Run admin-utility script in the new bash-scripting folder."
 
