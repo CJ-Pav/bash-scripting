@@ -25,7 +25,7 @@ function web_server_installer() {
 # web server management
 function web_server_management() {
     escape=1
-    while [ escape -ne 0 ]; do
+    while [ $escape -ne 0 ]; do
         cat ./ptech/menu/web_man_menu; echo
         read -p "Selection (#): " -r
         if [ $___status___ -eq -1 ]; then
