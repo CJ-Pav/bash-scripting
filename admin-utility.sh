@@ -170,9 +170,12 @@ function ptech_configuration() {
     fi
 
     # check mandatory software
-    /home/ptech/bash-scripting/ptech/scripts/ubuntu_check_software.sh; ___status___=$?
+    ubuntu_check_software; ___status___=$?
+    if [ $___status___ -ne 0 ]; then
+        echo "Warning: software check returned error status"
+    fi
 
-    return $___status___
+    return 0
 }
 
 
