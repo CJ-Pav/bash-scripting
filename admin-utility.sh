@@ -160,7 +160,7 @@ function ptech_configuration() {
     chmod +x /home/ptech/bash-scripting/ptech/scripts/ubuntu_check_software.sh
     chmod +x /home/ptech/bash-scripting/ptech/scripts/web_server_manager.sh
 
-    echo "Self update complete."
+    echo "Self update complete.";
 
     # restart application if update took place
     new_version=$(cat /home/ptech/bash-scripting/ptech/.data | grep -i "version")
@@ -185,7 +185,7 @@ __selection__=""
 function admin_utilities_menu() {
     escape=1
     while [ $escape -ne 0 ]; do
-        cat /home/ptech/bash-scripting/ptech/menu/main_menu; echo
+        echo; cat /home/ptech/bash-scripting/ptech/menu/main_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq -1 ]; then
             # error
@@ -214,7 +214,7 @@ function admin_utilities_menu() {
 # script driver
 function main() {
     echo; echo "*** Pavlovich Technologies Beta ***"
-    echo "Read the README.md file included before using this tool."
+    echo "Read the README.md file included before using this tool."; echo
 
     read -p "Welcome to the admin utilities tool set. Press any key to continue." -n 1 -r
     
