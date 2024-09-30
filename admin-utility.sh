@@ -158,7 +158,7 @@ function ptech_configuration() {
     echo "Self update complete."
 
     # check mandatory software
-    ptech/scripts/ubuntu_check_software.sh; ___status___=$?
+    /home/ptech/bash-scripting/ptech/scripts/ubuntu_check_software.sh; ___status___=$?
 
     return $___status___
 }
