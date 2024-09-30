@@ -35,7 +35,7 @@ function web_server_management() {
         elif [ $__selection__ -eq 0 ]; then
             # exit
             escape=0
-        elif [ $__selection_ -eq 1 ]; then
+        elif [ $__selection__ -eq 1 ]; then
             # view status
             read -p "Nginx proxy status (any key to continue)..." -r -n 1
             systemctl status nginx
