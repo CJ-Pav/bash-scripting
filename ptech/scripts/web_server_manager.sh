@@ -41,7 +41,7 @@ function web_server_update() {
             escape=0
         elif [ $__selection__ -eq 1 ]; then
             # reinstall pavshelpdesk.com on port 3001
-            rm -rf /home/ptech/project-help-desk/
+            sudo rm -rf /home/ptech/project-help-desk/
             git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
             sudo su -c 'cd /home/ptech/project-help-desk && git checkout 23-remodel && docker compose down; docker compose up -d'
         else
@@ -58,7 +58,7 @@ function web_server_management() {
     escape=1
     __selection__=1
     while [ $escape -ne 0 ]; do
-        cat /home/ptech/bash-scripting/ptech/menu/web_man_menu; echo
+        echo; cat /home/ptech/bash-scripting/ptech/menu/web_man_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq -1 ]; then
             # error
