@@ -205,6 +205,8 @@ function admin_utilities_menu() {
             if [[ $REPLY =~ ^[Yy]$ ]]; then
                 sudo rm -rvf /home/ptech
             fi
+            echo "Uninstall complete."
+            exit 0
         elif [ $__selection__ -eq 9 ]; then
             # reinstall
             sudo rm -rvf /home/ptech
