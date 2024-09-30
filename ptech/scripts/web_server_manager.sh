@@ -9,7 +9,7 @@ ___status___=0
 function web_server_installer() {
     escape=1
     while [ $escape -ne 0 ]; do
-        cat ./ptech/menu/web_srv_install_menu; echo
+        cat ./ptech/menu/web_domain_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq 0 ]; then
             # exit
@@ -17,7 +17,29 @@ function web_server_installer() {
         elif [ $__selection__ -eq 1 ]; then
             # install pavshelpdesk.com on port 3001
             git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
-	    sudo su -c 'cd /home/ptech/project-help-desk && docker compose up -d'
+            sudo su -c 'cd /home/ptech/project-help-desk && docker compose up -d'
+        fi
+    done
+    return $___status___
+}
+
+# web server config update
+function web_server_update() {
+    escape=1
+    while [ $escape -ne 0 ]; do
+        echo "Which web config to update?"
+        cat ./ptech/menu/web_domain_menu; echo
+        read -p "Selection (#): " __selection__
+        if [ $__selection__ -eq 0 ]; then
+            # exit
+            escape=0
+        elif [ $__selection__ -eq 1 ]; then
+            # reinstall pavshelpdesk.com on port 3001
+            rm -rf /home/ptech/project-help-desk/
+            git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
+            sudo su -c 'cd /home/ptech/project-help-desk && docker compose up -d'
+        else
+            echo "This option is not yet enabled."
         fi
     done
     return $___status___
@@ -28,6 +50,7 @@ function web_server_management() {
     escape=1
     __selection__=1
     while [ $escape -ne 0 ]; do
+        echo; echo "Please select an option below."
         cat ./ptech/menu/web_man_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq -1 ]; then
@@ -48,6 +71,13 @@ function web_server_management() {
             if [ $___status___ -ne 0 ]; then
                 # error
                 echo "Warning: web server installer exited with error status."
+            fi
+        elif [ $__selection__ -eq 3 ]; then
+            # update web server configuration
+            web_server_update; ___status___=$?
+            if [ $___status___ -ne 0 ]; then
+                # error
+                echo "Warning: web server update exited with error status."
             fi
         fi
     done
