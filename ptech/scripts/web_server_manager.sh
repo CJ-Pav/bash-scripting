@@ -58,7 +58,6 @@ function web_server_management() {
     escape=1
     __selection__=1
     while [ $escape -ne 0 ]; do
-        echo; echo "Please select an option below."
         cat ./ptech/menu/web_man_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq -1 ]; then
@@ -90,6 +89,6 @@ function web_server_management() {
         fi
     done
     escape=1
-    
+
     return $___status___
 }
