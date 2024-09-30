@@ -157,7 +157,7 @@ __selection__=""
 # admin untilities menu
 function admin_utilities_menu() {
     escape=1
-    while [ escape -ne 0 ]; do
+    while [ $escape -ne 0 ]; do
         cat ./ptech/menu/main_menu
 
         read -p "Selection (#): " -r
@@ -178,6 +178,10 @@ function admin_utilities_menu() {
             else
                 ___status___=0
             fi
+        elif [ $___status___ -eq 9 ]; then
+            # reinstall
+            sudo rm -rvf /home/ptech
+            ptech_configuration
         fi
     done
     return $___status___
