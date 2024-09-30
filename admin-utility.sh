@@ -173,7 +173,7 @@ __selection__=""
 function admin_utilities_menu() {
     escape=1
     while [ $escape -ne 0 ]; do
-        cat ./ptech/menu/main_menu; echo
+        cat /home/ptech/bash-scripting/ptech/menu/main_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq -1 ]; then
             # error
