@@ -8,9 +8,6 @@
 # run in any unix shell with git installed to sync with git (assuming repo is already cloned)
 # run from base directory of any cloned repo
 
-# set working directory & username
-wrkPath=$(pwd)
-
 # exit if root
 if [[ "$(echo $UID)" == "0" ]] || [[ "$(whoami)" == "root" ]]; then
     echo "This script does not need elevated permissions."
@@ -19,12 +16,12 @@ if [[ "$(echo $UID)" == "0" ]] || [[ "$(whoami)" == "root" ]]; then
 fi
 
 # add & commit current changes
-git add $wrkPath -A
+git add -A
 git commit -m "Commit recent changes - CJ-Pav"
 
 # pull external edits changes
 git pull
-git add $wrkPath -A
+git add -A
 git commit -m "Merge - CJ-Pav"
 git push
 git status

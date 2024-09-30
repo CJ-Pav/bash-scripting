@@ -159,25 +159,23 @@ function admin_utilities_menu() {
     escape=1
     while [ $escape -ne 0 ]; do
         cat ./ptech/menu/main_menu; echo
-        read -p "Selection (#): " -r
-        if [ $___status___ -eq -1 ]; then
+        read -p "Selection (#): " __selection__
+        if [ $__selection__ -eq -1 ]; then
             # error
             echo "Warning: admin utility exited with error status."
-        elif [ $___status___ -eq 0 ]; then
+        elif [ $__selection__ -eq 0 ]; then
             # exit
             escape=0
-        elif [ $___status___ -eq 1 ]; then
+        elif [ $__selection__ -eq 1 ]; then
             # webserver management
             web_server_management
-        elif [ $___status___ -eq 8 ]; then
+        elif [ $__selection__ -eq 8 ]; then
             # uninstall
             read -p "Warning: this will remove admin utilities and all related configurations. Continue? [y/N]: " -r
             if [[ $REPLY =~ ^[Yy]$ ]]; then
                 sudo rm -rvf /home/ptech
-            else
-                ___status___=0
             fi
-        elif [ $___status___ -eq 9 ]; then
+        elif [ $__selection__ -eq 9 ]; then
             # reinstall
             sudo rm -rvf /home/ptech
             ptech_configuration
