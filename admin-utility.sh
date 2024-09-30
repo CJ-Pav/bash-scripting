@@ -73,6 +73,10 @@ function clone_repo() {
     fi
 
     # clone AU repo
+    ls /home/ptech/bash-scripting/ptech/ | grep -i "scripts"; ___status___=$?
+    if [ $___status___ -eq 0 ]; then
+        rm -rvf /home/ptech/bash-scripting/
+    fi
     git clone git@github.com:CJ-Pav/bash-scripting.git /home/ptech/bash-scripting
 }
 
