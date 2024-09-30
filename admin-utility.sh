@@ -151,7 +151,7 @@ function ptech_configuration() {
     fi
 
     # make scripts executable
-    chmo4 +x /home/ptech/bash-scripting/admin-utility.sh
+    chmod +x /home/ptech/bash-scripting/admin-utility.sh
     chmod +x /home/ptech/bash-scripting/ptech/scripts/ubuntu_check_software.sh
     chmod +x /home/ptech/bash-scripting/ptech/scripts/web_server_manager.sh
 
