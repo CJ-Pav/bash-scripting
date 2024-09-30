@@ -103,6 +103,10 @@ function ptech_AU_install() {
 
     clone_repo
 
+    ls /usr/bin | grep -i "ptech-au"; ___status___=$?
+    if [ $___status___ -eq 0 ]; then
+        sudo rm /usr/bin/ptech-au
+    fi
     sudo ln -s /home/ptech/bash-scripting/admin-utility.sh /usr/bin/ptech-au
 
     echo "Exiting. Run admin-utility script non locally ($ ptech-au)."
