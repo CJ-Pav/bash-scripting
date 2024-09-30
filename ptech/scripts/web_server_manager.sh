@@ -58,7 +58,7 @@ function web_server_management() {
     escape=1
     __selection__=1
     while [ $escape -ne 0 ]; do
-        cat /home/ptech/bash-scripts/ptech/menu/web_man_menu; echo
+        cat /home/ptech/bash-scripting/ptech/menu/web_man_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq -1 ]; then
             # error
