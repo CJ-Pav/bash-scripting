@@ -164,7 +164,7 @@ function ptech_configuration() {
 
     # restart application if update took place
     new_version=$(cat /home/ptech/bash-scripting/ptech/.data | grep -i "version")
-    if [[ $version == $new_version ]]; then
+    if [[ ! $version == $new_version ]]; then
         echo "An update to source files has taken place. Please re-run this application. Exiting."
 	exit 0
     fi
