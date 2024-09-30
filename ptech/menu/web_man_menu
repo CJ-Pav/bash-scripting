@@ -1,0 +1,6 @@
+- Web Management Menu -
+0: Return to main Menu
+1: View status of web server
+2: Install a web server configuration
+3: Update a web server configuration
+4: Remove a web server configuration

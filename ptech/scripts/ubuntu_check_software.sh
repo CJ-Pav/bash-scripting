@@ -4,9 +4,6 @@
 # Edited: Apr 15, 2019
 # Description: general use bash script format
 
-# variable declarations
-___status___=0
-
 # install software
 function install_software() {
     # updates
@@ -83,7 +80,7 @@ check_installs() {
 }
 
 # script driver
-function main() {
+function ubuntu_check_software() {
     check_installs; ___status___=$?
     if [ $___status___ -ne 0 ]; then
         install_software
@@ -93,11 +90,3 @@ function main() {
     
     return $___status___
 }
-
-main; ___status___=$?
-
-if [ $___status___ -ne 0 ]; then
-    echo "WARN: exiting with non-zero status ($___status___)"
-fi
-
-exit $___status___ || return $___status___

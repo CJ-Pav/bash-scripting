@@ -10,8 +10,17 @@
 
 # 3 > ptech-errors.log
 
+# imports
+source ptech/scripts/ubuntu_check_software.sh
+source ptech/scripts/web_server_manager.sh
+
 # variable declarations (0 = true)
 ___status___=0
+
+
+#####################
+### CONFIGURATION ###
+#####################
 __username__=""
 ssh_email=""
 
@@ -47,9 +56,10 @@ clone_repo() {
     fi
 
     # clone AU repo
-    git clone git@github.com:CJ-Pav/bash-scripting.git
+    git clone git@github.com:CJ-Pav/bash-scripting.git /home/ptech/bash-scripting
 }
 
+# admin utility installer, sets up ssh key if dne and grabs scripts from Github
 function ptech_AU_install() {
     sudo mkdir -p /home/ptech/.data/
     sudo touch /home/ptech/.data/install.ptech
@@ -89,15 +99,16 @@ function ptech_AU_install() {
 
     echo "Exiting. Run admin-utility script in the new bash-scripting folder."
 
-    return 0
+    exit 0
 }
 
 # ptech_configuration
 function ptech_configuration() {
     # check scripts
     cat /home/ptech/.data/install.ptech | grep -i "username"; ___status___=$?
+    # if username field is populated in the install.ptech file, then status = 0
     if [ $___status___ -ne 0 ]; then
-        echo "Config missing, running install."
+        echo "Configuration files missing, running first time install."
         ptech_AU_install
         exit 0
     else
@@ -112,7 +123,6 @@ function ptech_configuration() {
             if [[ $REPLY =~ ^[Yy]$ ]]; then
                 echo "Running install."
                 ptech_AU_install
-                exit 0
             fi
             exit 1
         fi
@@ -122,7 +132,8 @@ function ptech_configuration() {
     git pull; ___status___=$?
 
     # make scripts executable
-    chmod +x ptech/scripts/check_software.sh
+    chmod +x ptech/scripts/ubuntu_check_software.sh
+    chmod +x ptech/scripts/web_server_manager.sh
 
     if [ $___status___ -ne 0 ]; then
         echo "Failed to auto update. Exiting."
@@ -137,23 +148,56 @@ function ptech_configuration() {
     return $___status___
 }
 
+
+####################
+### PROGRAM MAIN ###
+####################
+__selection__=""
+
+# admin untilities menu
+function admin_utilities_menu() {
+    escape=1
+    while [ escape -ne 0 ]; do
+        cat ./ptech/menu/main_menu
+
+        read -p "Selection (#): " -r
+        if [ $___status___ -eq -1 ]; then
+            # error
+            echo "Warning: admin utility exited with error status."
+        elif [ $___status___ -eq 0 ]; then
+            # exit
+            escape=0
+        elif [ $___status___ -eq 1 ]; then
+            # webserver management
+            web_server_management
+        elif [ $___status___ -eq 8 ]; then
+            # uninstall
+            read -p "Warning: this will remove admin utilities and all related configurations. Continue? [y/N]: " -r
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                sudo rm -rvf /home/ptech
+            else
+                ___status___=0
+            fi
+        fi
+    done
+    return $___status___
+}
+
 # script driver
 function main() {
     echo; echo "*** Pavlovich Technologies Beta ***"
     echo "Read the README.md file included before using this tool."
 
+    read -p "Welcome to the admin utilities tool set. Press any key to continue." -n 1 -r
+    
     # installer
-    read -p "Add ptech configuration to this system? [y/N]: " -r
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        ptech_configuration; ___status___=$?
-    else
-        ___status___=0
-    fi
-
-    # report errors
+    ptech_configuration; ___status___=$?
     if [ $___status___ -ne 0 ]; then
         echo "Warning: ptech_configuration exited with error status."
     fi
+
+    # admin utilities menu
+    admin_utilities_menu
 
     return $___status___
 }
