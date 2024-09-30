@@ -151,9 +151,9 @@ function ptech_configuration() {
     fi
 
     # make scripts executable
-    chmox +x /home/ptech/admin-utility.sh
-    chmod +x /home/ptech/scripts/ubuntu_check_software.sh
-    chmod +x /home/ptech/scripts/web_server_manager.sh
+    chmo4 +x /home/ptech/bash-scripting/admin-utility.sh
+    chmod +x /home/ptech/bash-scripting/ptech/scripts/ubuntu_check_software.sh
+    chmod +x /home/ptech/bash-scripting/ptech/scripts/web_server_manager.sh
 
     echo "Self update complete."
 
