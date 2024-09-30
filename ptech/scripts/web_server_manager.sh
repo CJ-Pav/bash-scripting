@@ -9,7 +9,7 @@ ___status___=0
 function web_server_installer() {
     escape=1
     while [ $escape -ne 0 ]; do
-        cat ./ptech/menu/web_domain_menu; echo
+        cat /home/ptech/bash-scripting/ptech/menu/web_domain_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq 0 ]; then
             # exit
@@ -28,7 +28,7 @@ function web_server_update() {
     escape=1
     while [ $escape -ne 0 ]; do
         echo "Which web config to update?"
-        cat ./ptech/menu/web_domain_menu; echo
+        cat /home/ptech/bash-scripting/ptech/menu/web_domain_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq 0 ]; then
             # exit
