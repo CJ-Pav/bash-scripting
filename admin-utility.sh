@@ -11,8 +11,8 @@
 # 3 > ptech-errors.log
 
 # imports
-source /home/ptech/scripts/ubuntu_check_software.sh
-source /homeptech/scripts/web_server_manager.sh
+source /home/ptech/bash-scripting/ptech/scripts/ubuntu_check_software.sh
+source /home/ptech/bash-scripting/ptech/scripts/web_server_manager.sh
 
 # variable declarations (0 = true)
 ___status___=0
