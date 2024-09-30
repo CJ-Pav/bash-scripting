@@ -14,9 +14,8 @@ function web_server_installer() {
             escape=0
         elif [ $__selection__ -eq 1 ]; then
             # install pavshelpdesk.com on port 3001
-            git clone git@github.com:CJ-Pav/project-help-desk.git
-            pwd > /home/ptech/
-            sudo su -C "cd "
+            git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
+	    sudo su -c 'cd /home/ptech/project-help-desk && docker compose up -d'
         fi
     done
     return $___status___
