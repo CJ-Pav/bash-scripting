@@ -140,6 +140,11 @@ function ptech_configuration() {
         fi
     fi
 
+    version=0
+
+    # grab current version
+    version=$(cat /home/ptech/bash-scripting/ptech/.data | grep -i "version")
+
     # self updater
     sudo rm -r /home/ptech/bash-scripting
 
@@ -156,6 +161,13 @@ function ptech_configuration() {
     chmod +x /home/ptech/bash-scripting/ptech/scripts/web_server_manager.sh
 
     echo "Self update complete."
+
+    # restart application if update took place
+    new_version=$(cat /home/ptech/bash-scripting/ptech/.data | grep -i "version")
+    if [[ $version == $new_version ]]; then
+        echo "An update to source files has taken place. Please re-run this application. Exiting."
+	exit 0
+    fi
 
     # check mandatory software
     /home/ptech/bash-scripting/ptech/scripts/ubuntu_check_software.sh; ___status___=$?
