@@ -29,6 +29,23 @@ check_ssh_keys() {
     # see if key exists, if not then create one
     ls /home/$__username__/.ssh/ | grep -i "id"; ___status___=$?
     if [ $___status___ -ne 0 ]; then
+        ### get user email
+        if [[ -z "$ssh_email" ]]; then
+            read -p "Enter your user email: " ssh_email
+        fi
+
+        ### confirm user email
+        escape=1
+        while [[ $escape -ne 0 ]]; do
+            read -p "Is $ssh_email correct? [y/N]: " -r
+            if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+                read -p "Re-enter email: " __username__
+            else
+                escape=0
+            fi
+        done;
+    
+        ### generate key
         ssh-keygen -t ed25519 -C "$ssh_email"
     fi
 
@@ -75,22 +92,6 @@ function ptech_AU_install() {
             escape=0
         fi
     done;
-    
-    ### get user email
-    if [[ -z "$ssh_email" ]]; then
-        read -p "Enter your user email: " ssh_email
-    fi
-
-    ### confirm user email
-    escape=1
-    while [[ $escape -ne 0 ]]; do
-        read -p "Is $ssh_email correct? [y/N]: " -r
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            read -p "Re-enter email: " __username__
-        else
-            escape=0
-        fi
-    done;
 
     ### check ssh keys
     check_ssh_keys
@@ -115,7 +116,7 @@ function ptech_configuration() {
         echo "Configuration file found."
 
         # check for actual script files
-        ls ptech/ | grep -i "scripts"; ___status___=$?
+        ls /home/ptech/ | grep -i "scripts"; ___status___=$?
         if [ $___status___ -ne 0 ]; then
             echo "Unable to locate install files."
             echo "Make sure to run this from the bash-scripting repository."
@@ -129,18 +130,21 @@ function ptech_configuration() {
     fi
 
     # self updater
-    git pull; ___status___=$?
+    sudo rm -rvf /home/ptech/bash-scripting
 
-    # make scripts executable
-    chmod +x ptech/scripts/ubuntu_check_software.sh
-    chmod +x ptech/scripts/web_server_manager.sh
+    git clone git@github.com:CJ-Pav/bash-scripting.git /home/ptech/bash-scripting; ___status___=$?
 
     if [ $___status___ -ne 0 ]; then
         echo "Failed to auto update. Exiting."
         return 1
-    else
-        echo "Self update complete."
     fi
+
+    # make scripts executable
+    chmox +x /home/ptech/admin-utility.sh
+    chmod +x /home/ptech/scripts/ubuntu_check_software.sh
+    chmod +x /home/ptech/scripts/web_server_manager.sh
+
+    echo "Self update complete."
 
     # check mandatory software
     ptech/scripts/ubuntu_check_software.sh; ___status___=$?
