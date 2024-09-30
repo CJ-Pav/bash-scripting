@@ -11,8 +11,8 @@
 # 3 > ptech-errors.log
 
 # imports
-source ptech/scripts/ubuntu_check_software.sh
-source ptech/scripts/web_server_manager.sh
+source /home/ptech/scripts/ubuntu_check_software.sh
+source /homeptech/scripts/web_server_manager.sh
 
 # variable declarations (0 = true)
 ___status___=0
@@ -25,7 +25,7 @@ __username__=""
 ssh_email=""
 
 # check ssh keys are installed, install, clone repo
-check_ssh_keys() {
+function check_ssh_keys() {
     # see if key exists, if not then create one
     ls /home/$__username__/.ssh/ | grep -i "id"; ___status___=$?
     if [ $___status___ -ne 0 ]; then
@@ -64,7 +64,7 @@ check_ssh_keys() {
 }
 
 # clone repo
-clone_repo() {
+function clone_repo() {
     # make sure git installed
     dpkg -s git; ___status___=$?
     if [ $___status___ -ne 0 ]; then
@@ -98,7 +98,9 @@ function ptech_AU_install() {
 
     clone_repo
 
-    echo "Exiting. Run admin-utility script in the new bash-scripting folder."
+    sudo ln -s /home/ptech/bash-scripting/admin-utility.sh /usr/bin/ptech-au
+
+    echo "Exiting. Run admin-utility script non locally ($ ptech-au)."
 
     exit 0
 }
@@ -119,7 +121,7 @@ function ptech_configuration() {
         ls /home/ptech/ | grep -i "scripts"; ___status___=$?
         if [ $___status___ -ne 0 ]; then
             echo "Unable to locate install files."
-            echo "Make sure to run this from the bash-scripting repository."
+            echo "Make sure to run this non locally ($ ptech-au)"
             read -p "Re run installer? [y/N]: " -r
             if [[ $REPLY =~ ^[Yy]$ ]]; then
                 echo "Running install."
