@@ -9,6 +9,7 @@ ___status___=0
 function web_server_installer() {
     escape=1
     while [ $escape -ne 0 ]; do
+        echo "Which web application to launch?"
         cat /home/ptech/bash-scripting/ptech/menu/web_domain_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq 0 ]; then
@@ -18,6 +19,9 @@ function web_server_installer() {
             # install pavshelpdesk.com on port 3001
             git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
             sudo su -c 'cd /home/ptech/project-help-desk && git checkout 23-remodel && docker compose up -d'
+            escape=0
+        else
+            echo "This option is not yet available."
         fi
     done
     return $___status___
