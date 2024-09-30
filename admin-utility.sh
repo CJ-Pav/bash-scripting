@@ -119,7 +119,7 @@ function ptech_configuration() {
         echo "Configuration file found."
 
         # check for actual script files
-        ls /home/ptech/ | grep -i "scripts"; ___status___=$?
+        ls /home/ptech/bash-scripting/ptech/ | grep -i "scripts"; ___status___=$?
         if [ $___status___ -ne 0 ]; then
             echo "Unable to locate install files."
             echo "Make sure to run this non locally ($ ptech-au)"
