@@ -24,6 +24,8 @@ function web_server_installer() {
             echo "This option is not yet available."
         fi
     done
+    escape=1
+
     return $___status___
 }
 
@@ -46,6 +48,8 @@ function web_server_update() {
             echo "This option is not yet enabled."
         fi
     done
+    escape=1
+
     return $___status___
 }
 
@@ -85,5 +89,7 @@ function web_server_management() {
             fi
         fi
     done
+    escape=1
+    
     return $___status___
 }
