@@ -37,7 +37,7 @@ function web_server_update() {
             # reinstall pavshelpdesk.com on port 3001
             rm -rf /home/ptech/project-help-desk/
             git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
-            sudo su -c 'cd /home/ptech/project-help-desk && git checkout 23-remodel && docker compose up -d'
+            sudo su -c 'cd /home/ptech/project-help-desk && git checkout 23-remodel && docker compose down; docker compose up -d'
         else
             echo "This option is not yet enabled."
         fi
