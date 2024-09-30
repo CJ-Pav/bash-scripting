@@ -3,6 +3,10 @@
 # Author: Chris Pavlovich
 # Edited: Sep 24, 2024
 # Description: Web server configuration utility.
+#               - Opens ports 22, 80, 443, 3000-3002
+#               - Installs htop, docker, npm, git, and anything else needed for
+#                 minimum functionality.
+#               - Will generate SSH key if none found
 
 # 3 > ptech-errors.log
 
@@ -128,7 +132,7 @@ function ptech_configuration() {
     fi
 
     # check mandatory software
-    ptech/scripts/check_software.sh; ___status___=$?
+    ptech/scripts/ubuntu_check_software.sh; ___status___=$?
 
     return $___status___
 }
@@ -138,7 +142,7 @@ function main() {
     echo; echo "*** Pavlovich Technologies Beta ***"
     echo "Read the README.md file included before using this tool."
 
-    # confirm with user
+    # installer
     read -p "Add ptech configuration to this system? [y/N]: " -r
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         ptech_configuration; ___status___=$?
@@ -146,6 +150,7 @@ function main() {
         ___status___=0
     fi
 
+    # report errors
     if [ $___status___ -ne 0 ]; then
         echo "Warning: ptech_configuration exited with error status."
     fi
