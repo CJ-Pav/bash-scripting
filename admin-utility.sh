@@ -141,7 +141,7 @@ function ptech_configuration() {
     fi
 
     # self updater
-    sudo rm -rvf /home/ptech/bash-scripting
+    sudo rm -r /home/ptech/bash-scripting
 
     git clone git@github.com:CJ-Pav/bash-scripting.git /home/ptech/bash-scripting; ___status___=$?
 
