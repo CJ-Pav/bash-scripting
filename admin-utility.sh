@@ -80,6 +80,7 @@ function clone_repo() {
 function ptech_AU_install() {
     sudo mkdir -p /home/ptech/.data/
     sudo touch /home/ptech/.data/install.ptech
+    sudo chown cjpavlovich /home/ptech
 
     ### confirm username
     __username__=$USER
