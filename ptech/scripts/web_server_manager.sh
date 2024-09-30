@@ -7,7 +7,7 @@ ___status___=0
 function web_server_installer() {
     escape=1
     while [ escape -ne 0 ]; do
-        cat ./ptech/menu/web_srv_install_menu
+        cat ./ptech/menu/web_srv_install_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq 0 ]; then
             # exit
@@ -26,7 +26,7 @@ function web_server_installer() {
 function web_server_management() {
     escape=1
     while [ escape -ne 0 ]; do
-        cat ./ptech/menu/web_man_menu
+        cat ./ptech/menu/web_man_menu; echo
         read -p "Selection (#): " -r
         if [ $___status___ -eq -1 ]; then
             # error

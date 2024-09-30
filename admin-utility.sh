@@ -158,8 +158,7 @@ __selection__=""
 function admin_utilities_menu() {
     escape=1
     while [ $escape -ne 0 ]; do
-        cat ./ptech/menu/main_menu
-
+        cat ./ptech/menu/main_menu; echo
         read -p "Selection (#): " -r
         if [ $___status___ -eq -1 ]; then
             # error
