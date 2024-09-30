@@ -6,7 +6,7 @@ ___status___=0
 # web server installer
 function web_server_installer() {
     escape=1
-    while [ escape -ne 0 ]; do
+    while [ $escape -ne 0 ]; do
         cat ./ptech/menu/web_srv_install_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq 0 ]; then
@@ -25,22 +25,23 @@ function web_server_installer() {
 # web server management
 function web_server_management() {
     escape=1
+    __selection__=1
     while [ $escape -ne 0 ]; do
         cat ./ptech/menu/web_man_menu; echo
-        read -p "Selection (#): " -r
-        if [ $___status___ -eq -1 ]; then
+        read -p "Selection (#): " __selection__
+        if [ $__selection__ -eq -1 ]; then
             # error
             echo "Warning: admin utility exited with error status."
-        elif [ $___status___ -eq 0 ]; then
+        elif [ $__selection__ -eq 0 ]; then
             # exit
             escape=0
-        elif [ $___status___ -eq 1 ]; then
+        elif [ $__selection_ -eq 1 ]; then
             # view status
             read -p "Nginx proxy status (any key to continue)..." -r -n 1
             systemctl status nginx
             read -p "Docker image status (any key to continue)..." -r -n 1
             sudo docker ps
-        elif [ $___status___ -eq 2 ]; then
+        elif [ $__selection__ -eq 2 ]; then
             # install web server config
             web_server_installer; ___status___=$?
             if [ $___status___ -ne 0 ]; then
