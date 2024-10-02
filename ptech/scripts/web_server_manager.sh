@@ -53,6 +53,34 @@ function web_server_update() {
     return $___status___
 }
 
+# configure reverse proxy menu
+function config_reverse_proxy_menu() {
+    escape=1
+    while [ $escape -ne 0 ]; do
+        echo "Configure reverse proxy for which web application?"
+        cat /home/ptech/bash-scripting/ptech/menu/web_domain_menu; echo
+        read -p "Selection (#): " __selection__
+        if [ $__selection__ -eq 0 ]; then
+            # exit
+            escape=0
+        elif [ $__selection__ -eq 1 ]; then
+            # install pavshelpdesk.com on port 3001
+            # git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
+            # sudo su -c 'cd /home/ptech/project-help-desk && git checkout 23-remodel && docker compose up -d'
+            
+            # copy nginx configs
+            
+
+            escape=0
+        else
+            echo "This option is not yet available."
+        fi
+    done
+    escape=1
+
+    return $___status___
+}
+
 # web server management
 function web_server_management() {
     escape=1

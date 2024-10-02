@@ -4,3 +4,4 @@
 2: Install a web server configuration
 3: Update a web server configuration
 4: Remove a web server configuration
+5: Configure reverse proxy
