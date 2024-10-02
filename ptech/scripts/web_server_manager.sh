@@ -69,7 +69,13 @@ function config_reverse_proxy_menu() {
             # sudo su -c 'cd /home/ptech/project-help-desk && git checkout 23-remodel && docker compose up -d'
             
             # copy nginx configs
-            
+            sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/pavshelpdesk.com /etc/nginx/sites-available/pavshelpdesk.com
+            sudo ln -s /etc/nginx/sites-available/pavshelpdesk.com /etc/nginx/sites-enabled/pavshelpdesk.com
+            sudo systemctl restart nginx
+
+            read -p "Enabling TLS encryption. Press any key to continue." -r -n 1
+
+            sudo certbot --nginx
 
             escape=0
         else

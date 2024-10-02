@@ -13,6 +13,7 @@ function install_software() {
     fi
 
     # installs
+    sudo apt-get -y install curl
     sudo apt-get -y install ssh
     sudo apt-get -y install npm
     sudo apt-get -y install nodejs
