@@ -20,6 +20,7 @@ function install_software() {
     sudo apt-get -y install vim
     sudo apt-get -y install htop
     sudo apt-get -y install nginx
+    sudo apt-get -y install certbot
     sudo snap install docker
 
     return $___status___
@@ -48,6 +49,11 @@ function configure_os() {
 # check each software is installed
 check_installs() {
     ___status___=0
+    
+    dpkg -s curl
+    if [ $? -ne 0 ]; then
+        ___status___=1
+    fi
     dpkg -s ssh
     if [ $? -ne 0 ]; then
         ___status___=1
@@ -69,6 +75,10 @@ check_installs() {
         ___status___=1
     fi
     dpkg -s nginx;
+    if [ $? -ne 0 ]; then
+        ___status___=1
+    fi
+    dpkg -s certbot
     if [ $? -ne 0 ]; then
         ___status___=1
     fi
