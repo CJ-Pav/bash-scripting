@@ -21,6 +21,7 @@ function install_software() {
     sudo apt-get -y install htop
     sudo apt-get -y install nginx
     sudo apt-get -y install certbot
+    sudo apt-get -y install python-certbot-nginx
     sudo snap install docker
 
     return $___status___
@@ -79,6 +80,10 @@ check_installs() {
         ___status___=1
     fi
     dpkg -s certbot
+    if [ $? -ne 0 ]; then
+        ___status___=1
+    fi
+    dpkg -s python-certbot-nginx
     if [ $? -ne 0 ]; then
         ___status___=1
     fi
