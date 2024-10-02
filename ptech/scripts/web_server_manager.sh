@@ -121,6 +121,13 @@ function web_server_management() {
                 echo "Warning: web server update exited with error status."
             fi
         fi
+        elif [ $__selection__ -eq 5 ]; then
+            # add nginx conf files and configure tls encryption for the domain
+            config_reverse_proxy_menu; ___status___=$?
+            if [ $___status___ -ne 0 ]; then
+                # error
+                echo "Warning: reverse proxy setup exited with error status."
+            fi
     done
     escape=1
 
