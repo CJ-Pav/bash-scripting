@@ -53,7 +53,7 @@ function web_server_update() {
     return $___status___
 }
 
-# configure reverse proxy menu
+# configure reverse proxy and load balancer menu
 function config_reverse_proxy_menu() {
     escape=1
     while [ $escape -ne 0 ]; do
@@ -70,12 +70,20 @@ function config_reverse_proxy_menu() {
             
             # copy nginx configs
             sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/pavshelpdesk.com /etc/nginx/sites-available/pavshelpdesk.com
+            sudo cp /home/ptech/bash-scripting/ptech/nginx/nginx.conf /etc/nginx/nginx.conf
+
+            # create sym links
             sudo ln -s /etc/nginx/sites-available/pavshelpdesk.com /etc/nginx/sites-enabled/pavshelpdesk.com
+
+            # restart nginx service
             sudo systemctl restart nginx
 
+            # enable tls encryption with lets encrypt certificate
             read -p "Enabling TLS encryption. Press any key to continue." -r -n 1
-
             sudo certbot --nginx
+
+            # copy post config, requires certificate have the expected name
+            sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-pavshelpdesk.com /etc/nginx/sites-available/pavshelpdesk.com
 
             escape=0
         else
