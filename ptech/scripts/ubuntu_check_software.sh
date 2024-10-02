@@ -20,8 +20,8 @@ function install_software() {
     sudo apt-get -y install vim
     sudo apt-get -y install htop
     sudo apt-get -y install nginx
-    sudo apt-get -y install certbot
-    sudo apt-get -y install python-certbot-nginx
+    sudo snap install --classic certbot
+    sudo ln -s /snap/bin/certbot /usr/bin/certbot
     sudo snap install docker
 
     return $___status___
