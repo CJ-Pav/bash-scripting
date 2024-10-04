@@ -14,13 +14,11 @@
 source /home/ptech/bash-scripting/ptech/scripts/ubuntu_check_software.sh
 source /home/ptech/bash-scripting/ptech/scripts/web_server_manager.sh
 
-# variable declarations (0 = true)
-___status___=0
-
-
 #####################
 ### CONFIGURATION ###
 #####################
+# variable declarations (0 = true)
+___status___=0
 __username__=""
 ssh_email=""
 
@@ -191,6 +189,7 @@ function admin_utilities_menu() {
         echo; cat /home/ptech/bash-scripting/ptech/menu/main_menu; echo
         read -p "Selection (#): " __selection__
         if [ $__selection__ -eq -1 ]; then
+        
             # error
             echo "Warning: admin utility exited with error status."
         elif [ $__selection__ -eq 0 ]; then
