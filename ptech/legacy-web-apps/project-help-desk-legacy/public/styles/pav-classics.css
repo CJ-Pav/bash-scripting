@@ -1,0 +1,202 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    max-width: 100%;
+    background-image: url('pexels-magda-ehlers-1631065.jpg');
+    background-position: center;
+}
+
+/* header styling */
+/* .header {
+    background-color: #8c5d2a;
+} */
+
+.headerButtonL {
+    border: none;
+}
+
+.button-container {
+    padding: 5px 0 5px 0;
+    align-items: center;
+}
+
+.info-banner {
+    padding: 2% 2% 2% 3%;
+    /* background-color: #e18339; */
+    /* background-color: #b48239; */
+    color: white;
+}
+
+.banner-text {
+    color: white;
+    text-align: center;
+    vertical-align: center;
+}
+
+.banner-text-center {
+    margin-top: 30px;
+}
+
+.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+}
+
+.align-right {
+    text-align: right;
+}
+
+/* title */
+.site-title {
+    /* color: black; */
+    font-weight: 400;
+    font-size: 22px;
+    cursor: pointer;
+    /* position: fixed; */
+}
+
+.company-motto {
+    color: white;
+    /* text-decoration: underline; */
+    text-align: center;
+    vertical-align: center;
+    /* padding-top: 2%; */
+    margin-top: 5%;
+}
+
+/* loading screen */
+.loader {
+    left: 50%;
+    top: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+}
+.loader #spinner {
+    box-sizing: border-box;
+    stroke: #cc0000;
+    stroke-width: 3px;
+}
+
+.greeter {
+    padding: 1% 0 1% 0;
+    text-align: center;
+    font-weight: bold;
+    /* background-color: #fb9062; */
+    color: white;
+}
+
+.section-header {
+    text-align: center;
+    font-weight: 400;
+    font-size:xx-large;
+    /* text-decoration: underline;
+    text-decoration-thickness: 1px; */
+    padding: 2.5% 0 0 0;
+    color: white;
+}
+
+/* .home-container {
+    background-color: #f4efe6;
+} */
+
+.error-container {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.basic-box {
+    background-color: #d3c4c4;
+    border: solid 2px;
+    border-color: rgba(0, 0, 0, 0.14);
+}
+
+.basic-container {
+    width: 100%;
+    padding: 2.5% 2.5% 2.5% 2.5%;
+    align-items: center;
+}
+
+.basic-text {
+    font-size: 14;
+}
+
+.opt-border {
+    padding: 1% 1% 1% 1%;
+}
+
+.opt-box {
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 2px 4px 10px 3px rgba(0, 0, 0, 0.12), 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+    /* background-color: #f9f4f4; */
+    background-color: #e8ddcc;
+    color: black;
+    padding: 5% 5% 5% 5%;
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+.opt-title {
+    text-align: center;
+    cursor: pointer;
+    font-size: 24px;
+    /* padding: 0.5% 1% 0.5% 1%; */
+    width: 100%;
+    color: black;
+}
+.opt-title:hover {
+    background-color: #acbaab;
+    /* text-decoration-line */
+}
+
+.opt-text {
+    text-align: left;
+    padding: 2.5% 5% 2.5% 5%;
+    width: 100%;
+}
+
+.sec-title {
+    text-align: left;
+    font-size: 24px;
+}
+
+.proj-title {
+    text-align: center;
+    font-size: 24px;
+    text-decoration: none;
+    color: black;
+}
+.active-link {
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+.active-link:hover {
+    color: black;
+}
+
+.proj-text {
+    font-size: 14;
+    text-align: justify;
+    padding-top: 1%;
+}
+.schedule-link {
+    font-size: 16;
+    text-align: justify;
+    padding-top: 1%;
+    font-weight: bold;
+}
+
+.dialog {
+    padding: 5.5%;
+    text-align: center;
+}
+.dialog-item {
+    padding-bottom: 2%;
+    text-align: center;
+}

@@ -16,6 +16,10 @@ function web_server_installer() {
             # exit
             escape=0
         elif [ $__selection__ -eq 1 ]; then
+            # install legacy.pavshelpdesk.com on port 3000
+            sudo su -c 'cd /home/ptech/bash-scripting/ptech/legacy-web-apps/project-help-desk-legacy/ && docker build -t phd-legacy . && docker start phd-legacy'
+            escape=0
+        elif [ $__selection__ -eq 2 ]; then
             # install pavshelpdesk.com on port 3001
             git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
             sudo su -c 'cd /home/ptech/project-help-desk && docker compose up --build -d'
@@ -40,6 +44,9 @@ function web_server_update() {
             # exit
             escape=0
         elif [ $__selection__ -eq 1 ]; then
+            # reinstall pavshelpdesk.com on port 3001
+            sudo su -c 'cd /home/ptech/project-help-desk && docker compose down; docker compose up --build -d'
+        elif [ $__selection__ -eq 2 ]; then
             # reinstall pavshelpdesk.com on port 3001
             sudo rm -rf /home/ptech/project-help-desk/
             git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk

@@ -1,0 +1,42 @@
+{{> header}}
+
+<main>
+    <div class="dialog-container user">
+    <div class="dialog">
+        <div class="dialog-title">Edit User Data</div>
+        <div class="dialog-body">
+            <form class="pure-form pure-form-aligned">
+                <fieldset>
+                    <div class="pure-u-1 pure-u-md-1-2">
+                        <img item-width="100px" item-height="100px" style="Height: 100px; Width: 100px;" src="images/camera-account.svg">
+                        <input type="checkbox" name="userAnnonCheck" value="Public">Anonymous<br>
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-2">
+                        <label for="name">First Name</label>
+                        <input id="name" class="pure-u-23-24" type="text" placeholder="First Name..">
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-2">
+                        <label for="password">Last Name</label>
+                        <input id="password" class="pure-u-23-24" type="text" placeholder="Last Name..">
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-2">
+                        <label for="state">Contact Type</label>
+                        <select id="state" class="pure-control-group">
+                            <option>Phone Number</option>
+                            <option>Email</option>
+                            <option>Address</option>
+                        </select>
+                        <input style="display: inline-block;" type="text" placeholder="Value" required="">
+                    </div>
+                    <form action="/action_page.php">Update Picture
+                        <input type="file" name="pic" accept="images/*">
+                    </form>
+                    <div class="dialog-buttons">
+                        <button id="butEditConfirm" class="button">Edit</button>
+                        <button id="butEditCancel" class="button">Cancel</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>

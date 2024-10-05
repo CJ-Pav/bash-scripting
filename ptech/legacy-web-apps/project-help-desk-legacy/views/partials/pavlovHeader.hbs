@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-sm navbar-dark header">
+    <div class="col-sm-4">
+        <a class="navbar-brand site-title" href="/">
+            Pav's Help Desk
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <p class="company-motto">
+            All things computer and electronic.
+        </p>
+    </div>
+    <ul class="navbar-nav ml-auto button-container">
+        <li class="nav-item">
+            <div class="btn-group" role="group">
+
+                <button id="click-home" type="button" class="btn btn-outline-light header-btn headerButtonR">
+                    Home
+                </button>
+                <script>
+                    document.getElementById('click-home').addEventListener('click', function() {
+                        window.location.href='/';
+                    });
+                </script>
+
+                <button id="click-about" type="button" class="btn btn-outline-light header-btn headerButtonR">
+                    About Us
+                </button>
+                <script>
+                    document.getElementById('click-about').addEventListener('click', function() {
+                        window.location.href='/about';
+                    });
+                </script>
+
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Schedule Support
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    {{!-- virtual links --}}
+                    <a class="dropdown-item" href="https://calendly.com/cjpavlovich/30-minute-weekday-virtual">
+                        30 Minute Virtual
+                    </a>
+                    <a class="dropdown-item" href="https://calendly.com/cjpavlovich/60-minute-weekday-virtual">
+                        60 Minute Virtual
+                    </a>
+                    
+                    {{!-- on-site links --}}
+                    <a class="dropdown-item" href="https://calendly.com/cjpavlovich/60-minute-weekday-on-site">
+                        60 Minute On-site
+                    </a>
+                    <a class="dropdown-item" href="https://calendly.com/cjpavlovich/90-minute-weekday-on-site">
+                        90 Minute On-site
+                    </a>
+                    
+                </div>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+{{!-- <div class="greeter">
+    <div>
+        Currently accepting cash or card payments through PayPal or Venmo.
+    </div>
+</div> --}}

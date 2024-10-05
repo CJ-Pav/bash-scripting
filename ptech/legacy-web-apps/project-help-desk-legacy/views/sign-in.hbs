@@ -1,0 +1,29 @@
+
+{{> header}}
+
+<div class="login-container">
+
+  <div class="row">
+    <article class="filler col-md-1"></article>
+
+    <article class="greeter col-md-10">
+      - Welcome to Prolixity! Please browse our current projects below,
+      or peruse our site as you wish!
+    </article>
+
+    <article class="filler col-md-1"></article>
+  </div>
+
+  <div class = "loginBox">
+      <form method="POST" action="/login">
+          <label for="username">Username:</label>
+          <input type="text" name="username"><br>
+          <label for="password">Password:</label>
+          <input type="password" name="password"><br>
+          <div class = "loginButton">
+              <input type="submit" value="Log In">
+          </div>
+      </form>
+  </div>
+
+</div>

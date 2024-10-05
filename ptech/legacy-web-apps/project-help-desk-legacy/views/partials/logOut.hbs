@@ -1,0 +1,16 @@
+<div class = "buttonContainer">
+    <a class="headerButtonR col-md-1" href="/logout">Log Out</a>
+    {{<form method="GET" action="/logout">
+        <input type="submit" name="logout" value="Log Out">
+    </form>}}
+    {{#if userName}}
+    <a class="headerButtonR col-md-1" href="/profile">Profile</a>
+        {{<form method="GET" action="/profile">
+            <input type="submit" name="profile" value="Profile">
+        </form>}}
+    {{else}}
+    <a class="headerButtonR col-md-1" href="/newUser">Sign Up</a>
+    {{<form method="GET" action="/newUser">
+        <input type="submit" name="newUser" value="New User">
+    </form>}}
+</div>
