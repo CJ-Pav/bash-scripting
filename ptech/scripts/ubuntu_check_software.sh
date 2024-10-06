@@ -43,6 +43,10 @@ function configure_os() {
     sudo ufw allow 3000
     sudo ufw allow 3001
     sudo ufw allow 3002
+    sudo ufw allow 3003
+    sudo ufw allow 43210
+    # sudo ufw allow 43211
+    # sudo ufw allow 43212
 
     return $___status___
 }

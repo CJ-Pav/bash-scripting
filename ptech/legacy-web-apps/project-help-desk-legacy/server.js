@@ -10,7 +10,7 @@ const express = require('express'),
     //   connectMongo = require('connect-mongo')(session);
 
 /* Configuration */
-var port = process.env.PORT || 80;
+var port = 3000;
 
 app.engine('hbs', exphbs({defaultLayout: 'main', extname: 'hbs'}));
 app.set('view engine', 'hbs');

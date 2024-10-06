@@ -1,0 +1,16 @@
+services:
+  pavshelpdesk.com:
+    image: phd-legacy
+    attach: false
+    build: 
+      context: ./project-help-desk-legacy
+      args:
+        - PORT=3000
+        #   - REACT_APP_SERVICES_HOST=/services/m
+    ports:
+      - "3000:3000"
+    networks: 
+      - legacy.pavshelpdesk.com
+
+networks:
+  legacy.pavshelpdesk.com:

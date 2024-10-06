@@ -16,13 +16,25 @@ function web_server_installer() {
             # exit
             escape=0
         elif [ $__selection__ -eq 1 ]; then
+            echo "Installing legacy apps..."
+
             # install legacy.pavshelpdesk.com on port 3000
-            sudo su -c 'cd /home/ptech/bash-scripting/ptech/legacy-web-apps/project-help-desk-legacy/ && docker build -t phd-legacy . && docker start phd-legacy'
+            echo "Installing legacy.pavshelpdesk.com on port 3000"
+            sudo su -c 'cd /home/ptech/bash-scripting/ptech/legacy-web-apps/project-help-desk-legacy/ && docker compose up --build -d'
             escape=0
         elif [ $__selection__ -eq 2 ]; then
-            # install pavshelpdesk.com on port 3001
+            echo "Installing pavshelpdesk.com on port 3001"
             git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
             sudo su -c 'cd /home/ptech/project-help-desk && docker compose up --build -d'
+
+            echo "Installing pavlovichtechnologies.com on port 3002"
+            git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
+            sudo su -c 'cd /home/ptech/project-help-desk && docker compose up --build -d'
+            escape=0
+        elif [ $__selection__ -eq 3 ]; then
+            echo "Installing alzie.com on port 43210"
+            git clone git@github.com:bytephyte/project-alzie.git /home/ptech/project-alzie
+            sudo su -c 'cd /home/ptech/project-alzie && docker compose up --build -d'
             escape=0
         else
             echo "This option is not yet available."
@@ -44,8 +56,8 @@ function web_server_update() {
             # exit
             escape=0
         elif [ $__selection__ -eq 1 ]; then
-            # reinstall pavshelpdesk.com on port 3001
-            sudo su -c 'cd /home/ptech/project-help-desk && docker compose down; docker compose up --build -d'
+            # reinstall legacy.pavshelpdesk.com on port 3000
+            sudo su -c 'cd /home/ptech/bash-scripting/ptech/legach-web-apps/ && docker compose down; docker compose up --build -d'
         elif [ $__selection__ -eq 2 ]; then
             # reinstall pavshelpdesk.com on port 3001
             sudo rm -rf /home/ptech/project-help-desk/
