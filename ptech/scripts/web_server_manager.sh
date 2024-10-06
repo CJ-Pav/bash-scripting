@@ -211,9 +211,9 @@ function config_reverse_proxy_menu() {
         #     sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-pavshelpdesk.com /etc/nginx/sites-available/pavshelpdesk.com
 
         #     escape=0
-        else
-            echo "This option is not yet available."
-        fi
+        # else
+        #     echo "This option is not yet available."
+        # fi
     done
     escape=1
 
