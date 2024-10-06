@@ -70,7 +70,7 @@ function web_server_update() {
             sudo su -c 'cd /home/ptech/project-help-desk && docker compose down; docker compose up --build -d'
 
             echo "Reinstalling pavlovichtechnologies.com on port 3002"
-            git clone git@github.com:Bytephyte/project-pav-tech-home-page.git /home/ptech/project-bytephyte-home-page/
+            git clone git@github.com:Bytephyte/project-pav-tech-home-page.git /home/ptech/project-pav-tech-home-page/
             sudo su -c 'cd /home/ptech/project-pav-tech-home-page/ && docker compose up --build -d'
 
             # echo "Reinstalling bytephyte.com on port 3003."
