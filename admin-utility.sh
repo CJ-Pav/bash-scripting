@@ -209,6 +209,8 @@ function admin_utilities_menu() {
         elif [ $__selection__ -eq 9 ]; then
             # reinstall
             sudo rm -rvf /home/ptech
+            sudo ufw --force disable
+            sudo ufw --force reset
             ptech_configuration
         fi
     done
