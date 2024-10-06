@@ -127,6 +127,7 @@ function config_reverse_proxy_menu() {
                 sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-legacy.pavshelpdesk.com /etc/nginx/sites-available/legacy.pavshelpdesk.com
 
                 escape=0
+                ;;
             "2")
                 sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/pavshelpdesk.com /etc/nginx/sites-available/pavshelpdesk.com
                 sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/pavlovichtechnologies.com /etc/nginx/sites-available/pavlovichtechnologies.com
@@ -148,10 +149,12 @@ function config_reverse_proxy_menu() {
 
                 # copy post config, requires certificate have the expected name
                 sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-legacy.pavshelpdesk.com /etc/nginx/sites-available/legacy.pavshelpdesk.com
+                ;;
             "3")
 
                 sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/bytephyte.com /etc/nginx/sites-available/bytephyte.com
                 sudo ln -s /etc/nginx/sites-available/alzie.com /etc/nginx/sites-enabled/alzie.com
+                ;;
         esac
         # if [ $__selection__ -eq 0 ]; then
         #     # exit
