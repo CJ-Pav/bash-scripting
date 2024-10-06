@@ -76,6 +76,7 @@ function clone_repo() {
         rm -rvf /home/ptech/bash-scripting/
     fi
     git clone git@github.com:CJ-Pav/bash-scripting.git /home/ptech/bash-scripting
+    sudo cjpavlovich -c 'cd /home/ptech/bash-scripting/ && git checkout admin-utility'
 }
 
 # admin utility installer, sets up ssh key if dne and grabs scripts from Github
