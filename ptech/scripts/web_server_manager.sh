@@ -90,7 +90,7 @@ function config_reverse_proxy_menu() {
             echo "Performing actions for server3..."
             sudo cp /home/ptech/bash-scripting/ptech/nginx/ptech-server-3-nginx.conf /etc/nginx/nginx.conf
             ;;
-        "ptech-server-4")
+        "cjpavlovich-HP-Pavilion-m6-Notebook-PC")
             echo "Performing actions for server4..."
             sudo cp /home/ptech/bash-scripting/ptech/nginx/ptech-server-4-nginx.conf /etc/nginx/nginx.conf
             ;;
@@ -144,15 +144,14 @@ function config_reverse_proxy_menu() {
                 read -p "Enabling TLS encryption. Press any key to continue." -r -n 1
 
                 echo "code incomplete exiting non zero."; exit 1
-                sudo certbot --nginx pavshelpdesk.com pavlovichtechnologies.com
+                sudo certbot --nginx pavshelpdesk.com
                 sudo certbot --nginx pavlovichtechnologies.com
 
                 # copy post config, requires certificate have the expected name
                 sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-legacy.pavshelpdesk.com /etc/nginx/sites-available/legacy.pavshelpdesk.com
                 ;;
             "3")
-
-                sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/bytephyte.com /etc/nginx/sites-available/bytephyte.com
+                sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/alzie.com /etc/nginx/sites-available/alzie.com
                 sudo ln -s /etc/nginx/sites-available/alzie.com /etc/nginx/sites-enabled/alzie.com
                 ;;
         esac
