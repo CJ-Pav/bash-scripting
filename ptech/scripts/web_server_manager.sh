@@ -28,8 +28,13 @@ function web_server_installer() {
             sudo su -c 'cd /home/ptech/project-help-desk && docker compose up --build -d'
 
             echo "Installing pavlovichtechnologies.com on port 3002"
-            git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
-            sudo su -c 'cd /home/ptech/project-help-desk && docker compose up --build -d'
+            git clone git@github.com:Bytephyte/project-pav-tech-home-page.git /home/ptech/project-bytephyte-home-page/
+            sudo su -c 'cd /home/ptech/project-pav-tech-home-page/ && docker compose up --build -d'
+
+            # echo "Installing bytephyte.com on port 3002"
+            # git clone git@github.com:Bytephyte/project-bytephyte-homepage.git /home/ptech/project-bytephyte-home-page/
+            # sudo su -c 'cd /home/ptech/project-bytephyte-home-page/ && docker compose up --build -d'
+
             escape=0
         elif [ $__selection__ -eq 3 ]; then
             echo "Installing alzie.com on port 43210"
@@ -59,10 +64,24 @@ function web_server_update() {
             # reinstall legacy.pavshelpdesk.com on port 3000
             sudo su -c 'cd /home/ptech/bash-scripting/ptech/legach-web-apps/ && docker compose down; docker compose up --build -d'
         elif [ $__selection__ -eq 2 ]; then
-            # reinstall pavshelpdesk.com on port 3001
+            echo "Reinstalling pavshelpdesk.com on port 3001."
             sudo rm -rf /home/ptech/project-help-desk/
             git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
             sudo su -c 'cd /home/ptech/project-help-desk && docker compose down; docker compose up --build -d'
+
+            echo "Reinstalling pavlovichtechnologies.com on port 3002"
+            git clone git@github.com:Bytephyte/project-pav-tech-home-page.git /home/ptech/project-bytephyte-home-page/
+            sudo su -c 'cd /home/ptech/project-pav-tech-home-page/ && docker compose up --build -d'
+
+            # echo "Reinstalling bytephyte.com on port 3003."
+            # git clone git@github.com:Bytephyte/project-bytephyte-homepage.git /home/ptech/project-bytephyte-home-page/
+            # sudo su -c 'cd /home/ptech/project-bytephyte-home-page/ && docker compose up --build -d'
+
+        elif [ $__selection__ -eq 3 ]; then
+            echo "Reinstalling alzie.com on port 43210"
+            sudo rm -rf /home/ptech/customers/project-alzie
+            git clone git@github.com:bytephyte/project-alzie.git /home/ptech/customers/project-alzie
+            sudo su -c 'cd /home/ptech/customers/project-alzie && docker compose up --build -d'
         else
             echo "This option is not yet enabled."
         fi
