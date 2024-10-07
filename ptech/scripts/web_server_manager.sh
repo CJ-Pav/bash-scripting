@@ -23,20 +23,32 @@ function web_server_installer() {
             sudo su -c 'cd /home/ptech/bash-scripting/ptech/legacy-web-apps/ && docker compose up --build -d'
             escape=0
         elif [ $__selection__ -eq 2 ]; then
-            ls /home/ptech/project-help-desk | grep -i "docker-compose.yml"; ___status___=$?
+            ls /home/ptech/project-help-desk/ | grep -i "docker-compose.yml"; ___status___=$?
+            if [ $___status___ -eq 0 ]; then # found
+                echo "Already installed. Use update option to online this configuration."
+            else
+                echo "Installing pavshelpdesk.com on port 3001"
+                git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
+                sudo su -c 'cd /home/ptech/project-help-desk && docker compose up --build -d'
+            fi
 
-            if [ ]
-            echo "Installing pavshelpdesk.com on port 3001"
-            git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
-            sudo su -c 'cd /home/ptech/project-help-desk && docker compose up --build -d'
+            ls /home/ptech/project-pav-tech-home-page/ | grep -i "docker-compose.yml"; ___status___=$?
+            if [ $___status___ -eq 0 ]; then # found
+                echo "Already installed. Use update option to online this configuration."
+            else
+                echo "Installing pavlovichtechnologies.com on port 3002"
+                git clone git@github.com:Bytephyte/project-pav-tech-home-page.git /home/ptech/project-pav-tech-home-page/
+                sudo su -c 'cd /home/ptech/project-pav-tech-home-page/ && docker compose up --build -d'
+            fi
 
-            echo "Installing pavlovichtechnologies.com on port 3002"
-            git clone git@github.com:Bytephyte/project-pav-tech-home-page.git /home/ptech/project-bytephyte-home-page/
-            sudo su -c 'cd /home/ptech/project-pav-tech-home-page/ && docker compose up --build -d'
-
-            # echo "Installing bytephyte.com on port 3002"
-            # git clone git@github.com:Bytephyte/project-bytephyte-homepage.git /home/ptech/project-bytephyte-home-page/
-            # sudo su -c 'cd /home/ptech/project-bytephyte-home-page/ && docker compose up --build -d'
+            # ls /home/ptech/project-bytephyte-home-page/ | grep -i "docker-compose.yml"; ___status___=$?
+            # if [ $___status___ -eq 0 ]; then # found
+            #     echo "Already installed. Use update option to online this configuration."
+            # else
+            #     echo "Installing pavlovichtechnologies.com on port 3002"
+            #     git clone git@github.com:Bytephyte/project-pav-tech-home-page.git /home/ptech/project-bytephyte-home-page/
+            #     sudo su -c 'cd /home/ptech/project-pav-tech-home-page/ && docker compose up --build -d'
+            # fi
 
             escape=0
         elif [ $__selection__ -eq 3 ]; then
