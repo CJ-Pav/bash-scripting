@@ -20,9 +20,12 @@ function web_server_installer() {
 
             # install legacy.pavshelpdesk.com on port 3000
             echo "Installing legacy.pavshelpdesk.com on port 3000"
-            sudo su -c 'cd /home/ptech/bash-scripting/ptech/legacy-web-apps/project-help-desk-legacy/ && docker compose up --build -d'
+            sudo su -c 'cd /home/ptech/bash-scripting/ptech/legacy-web-apps/ && docker compose up --build -d'
             escape=0
         elif [ $__selection__ -eq 2 ]; then
+            ls /home/ptech/project-help-desk | grep -i "docker-compose.yml"; ___status___=$?
+
+            if [ ]
             echo "Installing pavshelpdesk.com on port 3001"
             git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
             sudo su -c 'cd /home/ptech/project-help-desk && docker compose up --build -d'
@@ -70,6 +73,7 @@ function web_server_update() {
             sudo su -c 'cd /home/ptech/project-help-desk && docker compose down; docker compose up --build -d'
 
             echo "Reinstalling pavlovichtechnologies.com on port 3002"
+            sudo rm -rf /home/ptech/project-pav-tech-home-page/
             git clone git@github.com:Bytephyte/project-pav-tech-home-page.git /home/ptech/project-pav-tech-home-page/
             sudo su -c 'cd /home/ptech/project-pav-tech-home-page/ && docker compose up --build -d'
 
@@ -109,7 +113,7 @@ function config_reverse_proxy_menu() {
             echo "Performing actions for server3..."
             sudo cp /home/ptech/bash-scripting/ptech/nginx/ptech-server-3-nginx.conf /etc/nginx/nginx.conf
             ;;
-        "cjpavlovich-HP-Pavilion-m6-Notebook-PC")
+        "ptech-server-4")
             echo "Performing actions for server4..."
             sudo cp /home/ptech/bash-scripting/ptech/nginx/ptech-server-4-nginx.conf /etc/nginx/nginx.conf
             ;;
