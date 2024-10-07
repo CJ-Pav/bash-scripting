@@ -102,7 +102,7 @@ function web_server_update() {
             echo "This option is not yet enabled."
         fi
     done
-    escape=1
+    # escape=1
 
     return $___status___
 }
