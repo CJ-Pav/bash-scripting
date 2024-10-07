@@ -1,7 +1,7 @@
 
 server {
 
-    server_name         alzie.com;
+    server_name         alzie.pavshelpdesk.com;
     access_log          /var/log/nginx/alzie.com.access.log;
 
 

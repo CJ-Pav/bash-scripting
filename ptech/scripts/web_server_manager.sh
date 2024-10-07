@@ -156,7 +156,7 @@ function config_reverse_proxy_menu() {
 
                 # enable tls encryption with lets encrypt certificate
                 read -p "Enabling TLS encryption. Press any key to continue." -r -n 1
-                sudo certbot --nginx legacy.pavshelpdesk.com
+                sudo certbot -d legacy.pavshelpdesk.com --nginx
 
                 # copy post config, requires certificate have the expected name
                 sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-legacy.pavshelpdesk.com /etc/nginx/sites-available/legacy.pavshelpdesk.com
@@ -178,76 +178,29 @@ function config_reverse_proxy_menu() {
                 # enable tls encryption with lets encrypt certificate
                 read -p "Enabling TLS encryption. Press any key to continue." -r -n 1
 
-                echo "code incomplete exiting non zero."; exit 1
-                sudo certbot --nginx pavshelpdesk.com
-                sudo certbot --nginx pavlovichtechnologies.com
+                sudo certbot -d pavshelpdesk.com --nginx
+                sudo certbot -d pavlovichtechnologies.com --nginx
 
                 # copy post config, requires certificate have the expected name
-                sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-legacy.pavshelpdesk.com /etc/nginx/sites-available/legacy.pavshelpdesk.com
+                sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-pavshelpdesk.com /etc/nginx/sites-available/pavshelpdesk.com
+                sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-pavlovichtechnologies.com /etc/nginx/sites-available/pavlovichtechnologies.com
                 ;;
             "3")
                 sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/alzie.com /etc/nginx/sites-available/alzie.com
                 sudo ln -s /etc/nginx/sites-available/alzie.com /etc/nginx/sites-enabled/alzie.com
+                # restart nginx service
+                sudo systemctl restart nginx
+
+                # enable tls encryption with lets encrypt certificate
+                read -p "Enabling TLS encryption. Press any key to continue." -r -n 1
+
+                echo "code incomplete exiting non zero."; exit 1
+                sudo certbot -d alzie.pavshelpdesk.com --nginx
+
+                # copy post config, requires certificate have the expected name
+                sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-alzie.pavshelpdesk.com /etc/nginx/sites-available/alzie.pavshelpdesk.com
                 ;;
         esac
-        # if [ $__selection__ -eq 0 ]; then
-        #     # exit
-        #     escape=0
-        # elif [ $__selection__ -eq 1 ]; then
-        #     # install pavshelpdesk.com on port 3001
-        #     # git clone git@github.com:CJ-Pav/project-help-desk.git /home/ptech/project-help-desk
-        #     # sudo su -c 'cd /home/ptech/project-help-desk && git checkout 23-remodel && docker compose up -d'
-            
-        #     # copy nginx configs
-        #     sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/legacy.pavshelpdesk.com /etc/nginx/sites-available/legacy.pavshelpdesk.com
-        #     sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/pavshelpdesk.com /etc/nginx/sites-available/pavshelpdesk.com
-        #     sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/pavlovichtechnologies.com /etc/nginx/sites-available/pavlovichtechnologies.com
-        #     sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/bytephyte.com /etc/nginx/sites-available/bytephyte.com
-
-        #     # Get the hostname of the system
-        #     HOSTNAME=$(hostname)
-
-        #     # Perform actions based on the hostname
-        #     case "$HOSTNAME" in
-        #     "ptech-server-2")
-        #         echo "Performing actions for server2..."
-                
-        #         sudo cp /home/ptech/bash-scripting/ptech/nginx/ptech-server-2-nginx.conf /etc/nginx/nginx.conf
-        #         ;;
-        #     "ptech-server-3")
-        #         echo "Performing actions for server3..."
-
-        #         sudo cp /home/ptech/bash-scripting/ptech/nginx/ptech-server-3-nginx.conf /etc/nginx/nginx.conf
-        #         # Add commands specific to server3 here
-        #         ;;
-        #     "ptech-server-4")
-        #         echo "Performing actions for server4..."
-
-        #         sudo cp /home/ptech/bash-scripting/ptech/nginx/ptech-server-4-nginx.conf /etc/nginx/nginx.conf
-        #         ;;
-        #     *)
-        #         echo "Error: hostname not recognized."
-        #         exit 1
-        #         ;;
-        #     esac
-
-        #     # create sym links FOR EACH PAGE
-        #     sudo ln -s /etc/nginx/sites-available/pavshelpdesk.com /etc/nginx/sites-enabled/pavshelpdesk.com
-
-        #     # restart nginx service
-        #     sudo systemctl restart nginx
-
-        #     # enable tls encryption with lets encrypt certificate
-        #     read -p "Enabling TLS encryption. Press any key to continue." -r -n 1
-        #     sudo certbot --nginx
-
-        #     # copy post config, requires certificate have the expected name
-        #     sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-pavshelpdesk.com /etc/nginx/sites-available/pavshelpdesk.com
-
-        #     escape=0
-        # else
-        #     echo "This option is not yet available."
-        # fi
     done
     escape=1
 
