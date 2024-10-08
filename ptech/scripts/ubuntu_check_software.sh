@@ -96,11 +96,17 @@ check_installs() {
         ___status___=1
     fi
 
+    if [ $___status___ -eq 0 ]; then
+        echo "install_check=0" >> /home/ptech/data/
+    fi
+
     return $___status___
 }
 
 # script driver
 function ubuntu_check_software() {
+
+
     check_installs; ___status___=$?
     if [ $___status___ -ne 0 ]; then
         install_software
