@@ -165,8 +165,6 @@ function config_reverse_proxy_menu() {
 
                 # copy post config, requires certificate have the expected name
                 sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-legacy.pavshelpdesk.com /etc/nginx/sites-available/legacy.pavshelpdesk.com
-
-                escape=0
                 ;;
             "2")
                 sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/pavshelpdesk.com /etc/nginx/sites-available/pavshelpdesk.com
