@@ -52,7 +52,7 @@ function web_server_installer() {
 
             escape=0
         elif [ $__selection__ -eq 3 ]; then
-            echo "Installing alzie.com on port 43210"
+            echo "Installing alzie.pavshelpdesk.com on port 43210"
             git clone git@github.com:bytephyte/project-alzie.git /home/ptech/project-alzie
             sudo su -c 'cd /home/ptech/project-alzie && docker compose up --build -d'
             escape=0
@@ -94,7 +94,7 @@ function web_server_update() {
             # sudo su -c 'cd /home/ptech/project-bytephyte-home-page/ && docker compose up --build -d'
 
         elif [ $__selection__ -eq 3 ]; then
-            echo "Reinstalling alzie.com on port 43210"
+            echo "Reinstalling alzie.pavshelpdesk.com on port 43210"
             sudo rm -rf /home/ptech/customers/project-alzie
             git clone git@github.com:bytephyte/project-alzie.git /home/ptech/customers/project-alzie
             sudo su -c 'cd /home/ptech/customers/project-alzie && docker compose up --build -d'
@@ -186,8 +186,8 @@ function config_reverse_proxy_menu() {
                 sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/post-tls-pavlovichtechnologies.com /etc/nginx/sites-available/pavlovichtechnologies.com
                 ;;
             "3")
-                sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/alzie.com /etc/nginx/sites-available/alzie.com
-                sudo ln -s /etc/nginx/sites-available/alzie.com /etc/nginx/sites-enabled/alzie.com
+                sudo cp /home/ptech/bash-scripting/ptech/nginx/sites-available/alzie.pavshelpdesk.com /etc/nginx/sites-available/alzie.pavshelpdesk.com
+                sudo ln -s /etc/nginx/sites-available/alzie.pavshelpdesk.com /etc/nginx/sites-enabled/alzie.pavshelpdesk.com
                 # restart nginx service
                 sudo systemctl restart nginx
 
