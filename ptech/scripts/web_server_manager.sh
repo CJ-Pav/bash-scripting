@@ -194,7 +194,6 @@ function config_reverse_proxy_menu() {
                 # enable tls encryption with lets encrypt certificate
                 read -p "Enabling TLS encryption. Press any key to continue." -r -n 1
 
-                echo "code incomplete exiting non zero."; exit 1
                 sudo certbot -d alzie.pavshelpdesk.com --nginx
 
                 # copy post config, requires certificate have the expected name
