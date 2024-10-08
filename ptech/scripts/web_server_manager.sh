@@ -65,7 +65,7 @@ function web_server_installer() {
             echo "This option is not yet available."
         fi
     done
-    escape=1
+    # escape=1
 
     return $___status___
 }
@@ -206,7 +206,7 @@ function config_reverse_proxy_menu() {
                 ;;
         esac
     done
-    escape=1
+    # escape=1
 
     return $___status___
 }
