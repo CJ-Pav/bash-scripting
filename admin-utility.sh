@@ -21,6 +21,7 @@ source /home/ptech/bash-scripting/ptech/scripts/web_server_manager.sh
 ___status___=0
 __username__=""
 ssh_email=""
+__work_dir___=$pwd
 
 # check ssh keys are installed, install, clone repo
 function check_ssh_keys() {
@@ -224,6 +225,12 @@ function main() {
 
     read -p "Welcome to the admin utilities tool set. Press any key to continue." -n 1 -r
     
+    # cannot be run from within /home/ptech/
+    if [[ $__work_dir___ =~ "/home/ptech" ]]; then
+        echo "Error: script will crash if you run it from within /home/ptech"
+        exit 1
+    fi
+
     # installer
     ptech_configuration; ___status___=$?
     if [ $___status___ -ne 0 ]; then
