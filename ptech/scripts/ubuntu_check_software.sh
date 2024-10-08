@@ -110,7 +110,7 @@ function ubuntu_check_software() {
     cat /home/ptech/.data/install.ptech | grep -i "install_check=0"; ___status___=$?
 
     if [ $___status___ -eq 0 ]; then
-        echo "Software installed. Run repair to force reinstall."
+        echo "Software already installed. Run repair to force reinstall."
     else
         check_installs; ___status___=$?
         if [ $___status___ -ne 0 ]; then
@@ -121,7 +121,7 @@ function ubuntu_check_software() {
     cat /home/ptech/.data/install.ptech | grep -i "configured_os=0"; ___status___=$?
 
     if [ $___status___ -eq 0 ]; then
-        echo "Software already installed. Run repair to force reinstall."
+        echo "Config already installed. Run repair to force reinstall."
     else
         configure_os; ___status___=$?
     fi
