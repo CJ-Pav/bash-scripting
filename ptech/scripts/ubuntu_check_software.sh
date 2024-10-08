@@ -97,11 +97,6 @@ check_installs() {
         echo "certbot missing"
         ___status___=1
     fi
-    dpkg -s python-certbot-nginx
-    if [ $? -ne 0 ]; then
-        echo "python-certbot-nginx missing"
-        ___status___=1
-    fi
     sudo docker compose ls
     if [ $? -ne 0 ]; then
         echo "docker compose missing"
