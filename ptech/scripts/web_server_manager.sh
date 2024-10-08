@@ -140,7 +140,7 @@ function config_reverse_proxy_menu() {
             ;;
         esac
 
-        echo "Configure reverse proxy for which web application?"
+        echo; echo "Configure reverse proxy for which web application?"
         cat /home/ptech/bash-scripting/ptech/menu/web_domain_menu; echo
         read -p "Selection (#): " __selection__
         
