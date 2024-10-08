@@ -59,42 +59,52 @@ check_installs() {
     
     dpkg -s curl
     if [ $? -ne 0 ]; then
+        echo "curl missing"
         ___status___=1
     fi
     dpkg -s ssh
     if [ $? -ne 0 ]; then
+        echo "ssh missing"
         ___status___=1
     fi
-    dpkg -s npm;
+    dpkg -s npm
     if [ $? -ne 0 ]; then
+        echo "npm missing"
         ___status___=1
     fi
-    dpkg -s nodejs;
+    dpkg -s nodejs
     if [ $? -ne 0 ]; then
+        echo "nodejs missing"
         ___status___=1
     fi
-    dpkg -s vim;
+    dpkg -s vim
     if [ $? -ne 0 ]; then
+        echo "vim missing"
         ___status___=1
     fi
-    dpkg -s htop;
+    dpkg -s htop
     if [ $? -ne 0 ]; then
+        echo "htop missing"
         ___status___=1
     fi
-    dpkg -s nginx;
+    dpkg -s nginx
     if [ $? -ne 0 ]; then
+        echo "nginx missing"
         ___status___=1
     fi
     dpkg -s certbot
     if [ $? -ne 0 ]; then
+        echo "certbot missing"
         ___status___=1
     fi
     dpkg -s python-certbot-nginx
     if [ $? -ne 0 ]; then
+        echo "python-certbot-nginx missing"
         ___status___=1
     fi
-    sudo docker compose ls;
+    sudo docker compose ls
     if [ $? -ne 0 ]; then
+        echo "docker compose missing"
         ___status___=1
     fi
 
