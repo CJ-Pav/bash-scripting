@@ -48,6 +48,8 @@ function configure_os() {
     # sudo ufw allow 43211
     # sudo ufw allow 43212
 
+    echo "configured_os=0" >> /home/ptech/.data/install.ptech
+
     return $___status___
 }
 
@@ -97,7 +99,7 @@ check_installs() {
     fi
 
     if [ $___status___ -eq 0 ]; then
-        echo "install_check=0" >> /home/ptech/data/
+        echo "install_check=0" >> /home/ptech/.data/install.ptech
     fi
 
     return $___status___
@@ -105,14 +107,24 @@ check_installs() {
 
 # script driver
 function ubuntu_check_software() {
+    cat /home/ptech/.data/install.ptech | grep -i "install_check=0"; ___status___=$?
 
-
-    check_installs; ___status___=$?
-    if [ $___status___ -ne 0 ]; then
-        install_software
+    if [ $___status___ -eq 0 ]; then
+        echo "Software installed. Run repair to force reinstall."
+    else
+        check_installs; ___status___=$?
+        if [ $___status___ -ne 0 ]; then
+            install_software
+        fi
     fi
 
-    configure_os; ___status___=$?
+    cat /home/ptech/.data/install.ptech | grep -i "configured_os=0"; ___status___=$?
+
+    if [ $___status___ -eq 0 ]; then
+        echo "Software already installed. Run repair to force reinstall."
+    else
+        configure_os; ___status___=$?
+    fi
     
     return $___status___
 }
