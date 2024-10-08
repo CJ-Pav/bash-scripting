@@ -48,7 +48,7 @@ function configure_os() {
     # sudo ufw allow 43211
     # sudo ufw allow 43212
 
-    echo "configured_os=0" >> /home/ptech/.data/install.ptech
+    sudo su -c 'echo "configured_os=0" >> /home/ptech/.data/install.ptech'
 
     return $___status___
 }
@@ -99,7 +99,7 @@ check_installs() {
     fi
 
     if [ $___status___ -eq 0 ]; then
-        echo "install_check=0" >> /home/ptech/.data/install.ptech
+        sudo su -c 'echo "install_check=0" >> /home/ptech/.data/install.ptech'
     fi
 
     return $___status___
