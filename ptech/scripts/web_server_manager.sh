@@ -51,10 +51,15 @@ function web_server_installer() {
             # fi
 
             escape=0
-        elif [ $__selection__ -eq 3 ]; then
+            elif [ $__selection__ -eq 3 ]; then
+                    ls /home/ptech/project-alzie/ | grep -i "docker-compose.yml"; ___status___=$?
+            if [ $___status___ -eq 0 ]; then # found
+                echo "Already installed. Use update option to online this configuration."
+            else
             echo "Installing alzie.pavshelpdesk.com on port 43210"
             git clone git@github.com:bytephyte/project-alzie.git /home/ptech/project-alzie
             sudo su -c 'cd /home/ptech/project-alzie && docker compose up --build -d'
+            fi
             escape=0
         else
             echo "This option is not yet available."
