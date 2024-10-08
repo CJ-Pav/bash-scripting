@@ -112,6 +112,8 @@ check_installs() {
         sudo su -c 'echo "install_check=0" >> /home/ptech/.data/install.ptech'
     fi
 
+    echo "Check installs finished. Status $___status___."
+
     return $___status___
 }
 
