@@ -92,11 +92,6 @@ check_installs() {
         echo "nginx missing"
         ___status___=1
     fi
-    dpkg -s certbot
-    if [ $? -ne 0 ]; then
-        echo "certbot missing"
-        ___status___=1
-    fi
     sudo docker compose ls
     if [ $? -ne 0 ]; then
         echo "docker compose missing"
