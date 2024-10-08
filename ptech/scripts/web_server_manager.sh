@@ -77,7 +77,7 @@ function web_server_update() {
             escape=0
         elif [ $__selection__ -eq 1 ]; then
             # reinstall legacy.pavshelpdesk.com on port 3000
-            sudo su -c 'cd /home/ptech/bash-scripting/ptech/legach-web-apps/ && docker compose down; docker compose up --build -d'
+            sudo su -c 'cd /home/ptech/bash-scripting/ptech/legacy-web-apps/ && docker compose down; docker compose up --build -d'
         elif [ $__selection__ -eq 2 ]; then
             echo "Reinstalling pavshelpdesk.com on port 3001."
             sudo rm -rf /home/ptech/project-help-desk/
